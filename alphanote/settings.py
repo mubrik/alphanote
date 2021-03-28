@@ -52,15 +52,8 @@ else:
 """
 DATABASES = {}
 DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+""" conn = psycopg2.connect(DATABASE_URL, sslmode='require') """
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
-
-# auth backend, allauth
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
 # login redirect
 LOGIN_REDIRECT_URL = 'profile_detail'
@@ -175,15 +168,15 @@ if DEBUG:
 INSTALLED_APPS = [
     'userauth.apps.UserauthConfig',
     'profiles.apps.ProfilesConfig',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'notes.apps.NotesConfig',
     'notebooks.apps.NotebooksConfig',
     'django_summernote',
     'debug_toolbar',
     'django_extensions',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -193,6 +186,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 ]
+
+# User model to be used
+AUTH_USER_MODEL = 'userauth.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -245,8 +241,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# User model to be used
-AUTH_USER_MODEL = 'userauth.User'
+# auth backend, allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
