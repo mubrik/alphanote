@@ -23,6 +23,7 @@ PROJECTAPP_DIR = Path(__file__).resolve().parent
 
 STATIC_DIR = Path.joinpath(PROJECTAPP_DIR, 'static')
 MEDIA_ROOT = Path.joinpath(PROJECTAPP_DIR, 'media')
+STATIC_ROOT = Path.joinpath(PROJECTAPP_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
@@ -145,6 +146,9 @@ SUMMERNOTE_CONFIG = {
     }
 }
 
+# whitenoise config
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # django default
 
 # Quick-start development settings - unsuitable for production
@@ -154,9 +158,9 @@ SUMMERNOTE_CONFIG = {
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://aplhanoteapp.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
@@ -178,12 +182,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -245,5 +251,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
