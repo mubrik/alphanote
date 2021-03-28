@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import psycopg2
+import dj_database_url
 
 # my custom settings 
 # using projectapp dir instead of base dir to host templates and static file
@@ -28,10 +30,15 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 # Database postgres
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+"""
+if DEBUG:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DB_NAME'),
@@ -41,6 +48,12 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+else:
+"""
+DATABASES ={}
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # auth backend, allauth
@@ -157,10 +170,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ALLOWED_HOSTS = ['aplhanoteapp-django.herokuapp.com']
 
-ALLOWED_HOSTS = ['aplhanoteapp-django.herokuapp.com', '127.0.0.1']
+if DEBUG:
+    ALLOWED_HOSTS.append('127.0.0.1')
 
 
 # Application definition
