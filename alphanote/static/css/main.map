@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "main.css",
+	"sources": [
+		"../sass/main.scss"
+	],
+	"sourcesContent": [
+		"@use 'utils';\r\n@use 'responsive';\r\n@use 'gridflex';\r\n\r\n$background-color: rgba(228, 235, 232, 1);\r\n$text-color: rgba(25, 26, 25, 1);\r\n$border-color: rgba(3, 56, 64, 1);\r\n$hover-color: rgba(159, 205, 212, 0.5);\r\n\r\nhtml {\r\n  -webkit-box-sizing: border-box;\r\n  -moz-box-sizing: border-box;\r\n  box-sizing: border-box;\r\n}\r\n\r\n*,\r\n*::before,\r\n*::after {\r\n  -webkit-box-sizing: inherit;\r\n  -moz-box-sizing: inherit;\r\n  box-sizing: inherit;\r\n}\r\n\r\n.wrapper-body {\r\n  background-color: $background-color;\r\n  color: $text-color;\r\n  position: relative;\r\n}\r\n"
+	],
+	"names": [],
+	"mappings": "AAAA,IAAI,CAAJ,OAAI;AACJ,IAAI,CAAJ,YAAI;AACJ,IAAI,CAAJ,UAAI;;AAOJ,AAAA,IAAI,CAAC;EACH,kBAAkB,EAAE,UAAU;EAC9B,eAAe,EAAE,UAAU;EAC3B,UAAU,EAAE,UAAU;CACvB;;;AAED,AAAA,CAAC;AACD,CAAC,AAAA,QAAQ;AACT,CAAC,AAAA,OAAO,CAAC;EACP,kBAAkB,EAAE,OAAO;EAC3B,eAAe,EAAE,OAAO;EACxB,UAAU,EAAE,OAAO;CACpB;;;AAED,AAAA,aAAa,CAAC;EACZ,gBAAgB,EApBC,OAAsB;EAqBvC,KAAK,EApBM,OAAmB;EAqB9B,QAAQ,EAAE,QAAQ;CACnB"
+}

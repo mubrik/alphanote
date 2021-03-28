@@ -1,0 +1,11 @@
+<form method="POST" action="{% url 'note__notebook_update' object.id %}" class="note__notebook_update" id="optionForm1">
+    {% csrf_token %}
+    <div class="input-field">
+        {{ form.title }}
+    </div>
+    <div class="input-select">
+        {{ form.notebook.label_tag }}
+        {{ form.notebook }}
+    </div>
+</form>
+<!--{{ form.as_p }}  -->

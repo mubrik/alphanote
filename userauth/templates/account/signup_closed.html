@@ -1,0 +1,22 @@
+{% extends "userauth\base_account_template.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Up Closed" %}{% endblock %}
+
+{% block body %}
+<div class="account-main">
+  <div class="account-header">
+    <h1>{% blocktrans %}Sign Up Closed{% endblocktrans %}</h1>
+    <p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+  </div>
+  <div class="account-body">
+
+  </div>
+  <div class="social-body">
+    
+  </div>
+  <div class="account-footer">
+    <p>{% blocktrans %}<a href="{{ login_url }}">sign in here</a>.{% endblocktrans %}</p>
+  </div>
+</div>
+{% endblock body %}

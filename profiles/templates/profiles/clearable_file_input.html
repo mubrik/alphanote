@@ -1,0 +1,10 @@
+<div class="input-set">
+    <label for="{{ widget.name }}" class="input-set__label">Change Profile Picture:</label>
+    <input type="{{ widget.type }}" name="{{ widget.name }}" class="input-set__file"{% include "django/forms/widgets/attrs.html" %}>
+</div>
+<div class="input-set">
+    <label for="{{ widget.checkbox_id }}" class="input-set__label">Clear Profile Picture?</label>
+    <input type="checkbox" class="input-set__file" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"{% if widget.attrs.disabled %} disabled{% endif %}>
+</div>
+
+

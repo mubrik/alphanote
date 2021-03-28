@@ -1,0 +1,88 @@
+{% extends "userauth\base_account_template.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% get_providers as socialaccount_providers %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
+
+{% block body %}
+<div class="account-main">
+  <div class="account-header">
+    <h1>{% trans "Noted" %}</h1>
+    <h3>{% trans "Welcome to Noted, A simple note taking app." %}</h3>
+    <h4>{% blocktrans with site.name as site_name %}Please sign in below, Create a {{ site_name }} account <a href="{{ signup_url }}">here</a>
+      or Sign in with a Third Party Account.{% endblocktrans %}
+    </h4>
+  </div>
+  <div class="account-body">
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      {{ error }}
+    {% endfor %}
+    {% endif %}
+    <div class="input-set">
+      {% for error in form.login.errors  %} {{ error }}{% endfor %}
+      <label class="input-set__label">Username:</label>
+      <div class="input-set__file">
+      {{ form.login }}
+      </div>
+    </div>
+    <div class="input-set">
+      {% for error in form.password.errors  %} {{ error }}{% endfor %}
+      <label class="input-set__label">Password:</label>
+      <div class="input-set__file">
+      {{ form.password }}
+      </div>
+    </div>
+    <div class="input-set">
+      {{ form.remember.errors }}
+      <label class="input-set__label">Remember Me?:</label>
+      <div class="input-set__file">
+      {{ form.remember }}
+      </div>
+    </div>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button class="bttn--base primaryAction" type="submit">{% trans "Sign In" %}</button>
+  </form>
+  </div>
+  <div class="social-body">
+    {% get_providers as socialaccount_providers %}
+    {% for provider in socialaccount_providers %}
+    {% if provider.id == "openid" %}
+    {% for brand in provider.get_brands %}
+      <a title="{{brand.name}}" 
+        class=" bttn--social btn-social socialaccount_provider {{provider.id}} {{brand.id}}" 
+        href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
+        ><span class="fab fa-google"></span> Sign in With brand {{brand.name}}</a>
+    {% endfor %}
+    {% endif %}
+      <a title="{{provider.name}}" class=" bttn--social btn-social socialaccount_provider {{provider.id}}" 
+        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><span class="fab fa-google"></span> Sign in With {{provider.name}}</a>
+    {% endfor %}
+  </div>
+  <div class="account-footer">
+    <a class=" button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+    <div class="login-or">{% blocktrans %} Or signup <a href="{{ signup_url }}">here</a>{% endblocktrans %}</div>
+  </div>
+</div>
+
+{% endblock body %}
+
+
+{% block script %}
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+  <script> utils.callToast("{{ error }}") </script>
+{% endfor %}
+{% endif %}
+{% endblock script %}
+
+    

@@ -1,0 +1,21 @@
+<form method="POST" action="{% url 'note_view_form' object.id %}" class="note-form" id="optionForm2">
+  {% csrf_token %}
+  {% for hidden in form.hidden_fields %}
+  {{ hidden }}
+  {% endfor %}
+  <div class="input-field">
+    {{ form.content.errors }}
+    {{ form.content | safe }}
+  </div>
+  <div class="input-field">
+    {{ form.title.errors }}
+    {{ form.title }}
+    {{ form.title.label_tag }}
+  </div>
+  <div class="input-select">
+    {{ form.notebook.errors }}
+    {{ form.notebook.label_tag }}
+    {{ form.notebook }}
+  </div>
+  <button type="submit" class="bttn--base"> Update Note</button>
+</form>

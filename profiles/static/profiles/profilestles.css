@@ -1,0 +1,25 @@
+.profile-card {
+  display: flex;
+  flex-direction: row;
+  background-color: lightblue;
+  align-items: center;
+}
+.profile-card img {
+  border-radius: 20%;
+}
+.profile-card p {
+  font-size: 2rem;
+}
+
+.profile-stats {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.profile-stats .card-mini {
+  align-items: center;
+  background-color: lightblue;
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=profilestles.css.map */

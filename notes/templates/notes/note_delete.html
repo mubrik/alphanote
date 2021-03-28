@@ -1,0 +1,29 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block styles %}
+  <link href="{% static 'notes/summernote/summernote-lite.min.css' %}" rel="stylesheet" />
+{% endblock styles %}
+{% block body %}
+<form method="POST">
+  {% csrf_token %}
+  <button type="submit" class="bttn"> Delete</button>
+</form>
+{% endblock body %}
+{% block script %}
+  <script src="{% static 'notes/summernote/summernote-lite.min.js' %}"> </script>
+{% endblock script %}
+
+{% block modalform %}
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">New Note</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body"><form method="POST" name='NoteForm' id="NoteForm">{% csrf_token %} {{ form }} </form></div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary" form="NoteForm" >Save changes</button>
+  </div>
+{% endblock modalform %}
+
+

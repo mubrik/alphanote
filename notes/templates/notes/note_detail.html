@@ -1,0 +1,66 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block styles %}
+  <link href="{% static 'notes/summernote/summernote-customlite.min.css' %}" rel="stylesheet" />
+{% endblock styles %}
+
+{% block innermain %}
+  <div class ="inner-main" style="justify-content: center;">
+    {% block body %}
+    <form method="POST" class="note-form">
+      {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %}
+        <div class="input-field">
+          {{ form.content.errors }}
+          {{ form.content | safe }}
+        </div>
+        <div class="input-field">
+          {{ form.title.errors }}
+          {{ form.title }}
+          {{ form.title.label_tag }}
+        </div>
+        <div class="input-select">
+          {{ form.notebook.errors }}
+          {{ form.notebook.label_tag }}
+          {{ form.notebook }}
+        </div>
+        <button type="submit" class="bttn--base"> Update Note</button>
+    </form>
+    {% endblock body %}
+  </div>
+{% endblock innermain %}
+
+{% block modaltitle %}
+  <h5 class="modal-title" id="exampleModalLabel">New Note</h5>
+{% endblock modaltitle %}  
+
+{% block modalbody %}
+  <form method="POST" name='ModalForm' id="ModalForm">
+    {% csrf_token %}
+    {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    <div class="input-field">
+      {{ form.content.errors }}
+      {{ form.content }}
+    </div>
+    <div class="input-field">
+      {{ form.title.errors }}
+      {{ form.title }}
+      {{ form.title.label_tag }}
+    </div>
+    <div class="input-field">
+      {{ form.notebook.errors }}
+      {{ form.notebook }}
+      {{ form.notebook.label_tag }}
+    </div>
+  </form>
+{% endblock modalbody %}
+
+{% block script %}
+  <script src="{% static 'notes/summernote/summernote-lite.min.js' %}"> </script>
+{% endblock script %}
+

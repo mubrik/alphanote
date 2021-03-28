@@ -1,0 +1,43 @@
+.account-main {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-areas: "welcome welcome" "login social_login" "footer footer";
+  justify-items: center;
+  padding: 0.4em 0.5em;
+}
+.account-main > .account-header {
+  grid-area: welcome;
+  justify-self: center;
+  text-align-last: center;
+  margin-bottom: 0.5em;
+}
+.account-main > .account-body {
+  grid-area: login;
+  justify-self: end;
+  margin: 0.2em 0.4em;
+}
+.account-main > .account-body form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.account-main > .account-body form .bttn {
+  background: linear-gradient(91deg, #d6e3ea 47%, #f6f1ed 76%);
+  box-shadow: 1px 1px 4px 1px rgba(50, 50, 50, 0.75);
+  min-height: 40px;
+}
+.account-main > .account-body form .bttn:hover {
+  background: white;
+  box-shadow: 1px 1px 4px 1px rgba(120, 199, 236, 0.75);
+}
+.account-main > .social-body {
+  grid-area: social_login;
+  justify-self: flex-start;
+  margin: 0.2em 0.4em;
+}
+.account-main > .account-footer {
+  grid-area: footer;
+}
+
+/*# sourceMappingURL=userstyles.css.map */
