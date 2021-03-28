@@ -85,10 +85,6 @@ EMAIL_HOST_PASSWORD = os.environ.get('SG_API_KEY')
 SITE_ID = 1
 """ add django.contrib.sites to app """
 
-# User model to be used
-AUTH_USER_MODEL = 'userauth.User'
-
-
 # for debug toolbar 
 ''' add the installed app and middleware
     'debug_toolbar.middleware.DebugToolbarMiddleware' midware
@@ -175,9 +171,7 @@ ALLOWED_HOSTS = ['aplhanoteapp-django.herokuapp.com']
 if DEBUG:
     ALLOWED_HOSTS.append('127.0.0.1')
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'userauth.apps.UserauthConfig',
     'profiles.apps.ProfilesConfig',
@@ -251,6 +245,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# User model to be used
+AUTH_USER_MODEL = 'userauth.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
