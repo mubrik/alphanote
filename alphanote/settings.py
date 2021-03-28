@@ -22,7 +22,6 @@ PROJECTAPP_DIR = Path(__file__).resolve().parent
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_DIR = Path.joinpath(PROJECTAPP_DIR, 'static')
-STATIC_ROOT = Path.joinpath(PROJECTAPP_DIR, 'static')
 MEDIA_ROOT = Path.joinpath(PROJECTAPP_DIR, 'media')
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = '/static/'
