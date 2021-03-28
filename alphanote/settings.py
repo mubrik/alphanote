@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+import os
 
 # my custom settings 
 # using projectapp dir instead of base dir to host templates and static file
@@ -33,9 +33,9 @@ MEDIA_URL = '/media/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -61,11 +61,11 @@ PASSWORD_HASHERS = [
 
 # email backend
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = config('SG_HOST')
+EMAIL_HOST = os.environ.get('SG_HOST')
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = config('SG_API_KEY')
+EMAIL_HOST_PASSWORD = os.environ.get('SG_API_KEY')
 
 # site for django.contrib.sites app
 SITE_ID = 1
@@ -87,7 +87,7 @@ INTERNAL_IPS = [
 ]
 
 # Provider specific settings for all-auth
-DEFAULT_FROM_EMAIL = config('FROM_EMAIL')
+DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -95,8 +95,8 @@ SOCIALACCOUNT_PROVIDERS = {
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
         'APP': {
-            'client_id': config('G_ID'),
-            'secret': config('G_SECRET'),
+            'client_id': os.environ.get('G_ID'),
+            'secret': os.environ.get('G_SECRET'),
             'key': ''
         },
         'SCOPE': [
@@ -151,7 +151,7 @@ SUMMERNOTE_CONFIG = {
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
