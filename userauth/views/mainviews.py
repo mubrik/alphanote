@@ -15,13 +15,13 @@ class LoginHandler(LoginView):
 
 class AjaxPasswordChangeView(PasswordChangeView):
 
-    template_name = 'userauth\password_change_ajax.html'
+    template_name = 'userauth/password_change_ajax.html'
     success_url = reverse_lazy("profile_detail")
 
 
 class AjaxPasswordResetView(PasswordResetView):
 
-    template_name = 'userauth\password_reset_ajax.html'
+    template_name = 'userauth/password_reset_ajax.html'
     success_url = reverse_lazy("profile_detail")
 
 class PasswordChangeHandler(PasswordChangeView):
