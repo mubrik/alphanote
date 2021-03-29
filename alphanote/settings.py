@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import psycopg2
 import dj_database_url
 import django_heroku
 
@@ -37,27 +36,12 @@ DEBUG = True
 # Database postgres
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-"""
-if DEBUG:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-else:
-"""
 DATABASES = {}
 DATABASE_URL = os.environ['DATABASE_URL']
-""" conn = psycopg2.connect(DATABASE_URL, sslmode='require') """
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # login redirect
-LOGIN_REDIRECT_URL = 'profile_detail'
+LOGIN_REDIRECT_URL = 'note_home'
 
 # password hashers, remember to install packages
 PASSWORD_HASHERS = [
@@ -76,21 +60,15 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = os.environ.get('SG_API_KEY')
 
 # site for django.contrib.sites app
-SITE_ID = 1
 """ add django.contrib.sites to app """
-
-# for debug toolbar 
-''' add the installed app and middleware
-    'debug_toolbar.middleware.DebugToolbarMiddleware' midware
-    'debug_toolbar' to apps
-    dont forget 'path('__debug__/', include(debug_toolbar.urls))' in urls
-    add 'django_extensions' to apps
-'''
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+SITE_ID = 1
 
 # Provider specific settings for all-auth
+# auth backend, allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 SOCIALACCOUNT_PROVIDERS = {
@@ -133,7 +111,6 @@ SOCIALACCOUNT_PROVIDERS = {
 SUMMERNOTE_THEME = 'lite'
 SUMMERNOTE_CONFIG = {
     'iframe': False,
-    
     'summernote' : {
         'width': '100%',
         'codeviewFilter': True,
@@ -162,10 +139,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = ['alphanoteapp-django.herokuapp.com']
 
-if DEBUG:
-    ALLOWED_HOSTS.append('127.0.0.1')
-
 # Application definition
+# django_extensions for some model classes
 INSTALLED_APPS = [
     'userauth.apps.UserauthConfig',
     'profiles.apps.ProfilesConfig',
@@ -176,7 +151,6 @@ INSTALLED_APPS = [
     'notes.apps.NotesConfig',
     'notebooks.apps.NotebooksConfig',
     'django_summernote',
-    'debug_toolbar',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -194,7 +168,6 @@ AUTH_USER_MODEL = 'userauth.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -240,12 +213,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
-
-# auth backend, allauth
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 # Internationalization

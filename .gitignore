@@ -142,6 +142,3 @@ cython_debug/
 
 #vscode settings
 .vscode
-
-# local migrations
-/migrations
