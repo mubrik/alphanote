@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-import django_heroku
 
 # my custom settings 
 # using projectapp dir instead of base dir to host templates and static file
@@ -227,5 +226,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-django_heroku.settings(locals())
