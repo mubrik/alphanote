@@ -112,7 +112,7 @@ SUMMERNOTE_CONFIG = {
     'iframe': False,
     'summernote' : {
         'width': '100%',
-        'codeviewFilter': True,
+        'codeviewFilter': False,
         'toolbar': [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
