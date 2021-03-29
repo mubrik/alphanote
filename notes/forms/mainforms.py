@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django_summernote.widgets import SummernoteInplaceWidget
 from notes.models import Note
 
 # get the default user for the project/app
@@ -31,6 +32,7 @@ class CreateNoteForm(forms.ModelForm):
 
     def __init__(self, user=None, *args, **kwargs):
         super(CreateNoteForm, self).__init__(*args, **kwargs)
+        self.fields['content'].widget = SummernoteInplaceWidget(attrs={'summernote': {'width': '100%', 'height': 'inherit'}})
         if user:
             self.fields['notebook'].queryset = UserModel.objects.get(username=user.username).created_notebooks.all()
             self.fields['notebook'].label = 'Notebooks:'

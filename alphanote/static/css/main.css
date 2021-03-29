@@ -489,14 +489,13 @@ body {
   background: inherit;
   width: 100%;
 }
-.modal .modal-body .note-form .note-editable {
-  height: 40vh;
-}
-.modal .modal-body #NoteModalForm .note-editable {
-  height: 30vh;
+.modal .modal-body .note-form .note-editing-area {
+  background: linear-gradient(92deg, white 43%, #ebeef3 88%);
+  height: 38vh;
 }
 .modal .modal-body #NoteModalForm .note-editing-area {
   background: linear-gradient(92deg, white 43%, #ebeef3 88%);
+  height: 38vh;
 }
 .modal .modal-footer {
   display: flex;
@@ -729,6 +728,10 @@ body {
 }
 
 /* Tooltip container */
+.tooltip {
+  box-sizing: inherit;
+}
+
 .tooltip > .tooltiptext::after {
   content: " ";
   position: absolute;
