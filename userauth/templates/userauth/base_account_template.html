@@ -23,7 +23,7 @@
     <div class="wrapper-body mgrid">
         <nav class="wrapper-nav" role="navigation" aria-label="main">
             <div class="nav-icon">
-            <a href="/"><img src='{{ MEDIA_PREFIX }}basefiles/NOTEDDK.png' alt="" class="nav-img"></a>
+            <a href="/"><img src="{% static 'basefiles/NOTEDDK.png' %}" alt="" class="nav-img"></a>
             </div>
             <div class="nav-main">
             {% if user.is_authenticated %}
