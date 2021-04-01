@@ -164,7 +164,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-ALLOWED_HOSTS = ['alphanote-dev.eu-west-2.elasticbeanstalk.com', '172.31.20.84']
+ALLOWED_HOSTS = ['alphanote-dev.eu-west-2.elasticbeanstalk.com', 'localhost']
 
 # Application definition
 # django_extensions for some model classes
