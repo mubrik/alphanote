@@ -14,22 +14,34 @@ from pathlib import Path
 import os
 
 # my custom settings 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+
 # using projectapp dir instead of base dir to host templates and static file
 PROJECTAPP_DIR = Path(__file__).resolve().parent
-
-# directory for staticfiles, media url
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_DIR = Path.joinpath(PROJECTAPP_DIR, 'static')
 MEDIA_ROOT = Path.joinpath(PROJECTAPP_DIR, 'media')
 STATIC_ROOT = Path.joinpath(PROJECTAPP_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR, ]
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# directory for staticfiles, media url
+# Static files (CSS, JavaScript, Images)
+# whitenoise and storage config
+# install boto3 and django-storages
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = 'noted-django'
+AWS_S3_REGION_NAME = 'eu-west-2'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+# whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_HOST = 'https://d2f08mg0fh6n2l.cloudfront.net' if not DEBUG else ''
+STATIC_URL = STATIC_HOST + '/static/' if not DEBUG else '/static/'
+MEDIA_URL = '/media/'
 
 # Database postgres
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -69,12 +81,9 @@ PASSWORD_HASHERS = [
 ]
 
 # email backend
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.environ.get('SG_HOST')
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('SG_API_KEY')
+SENDGRID_API_KEY = os.environ['SG_API_KEY']
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_SANDBOX_MODE_IN_DEBUG=False
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 
 # site for django.contrib.sites app

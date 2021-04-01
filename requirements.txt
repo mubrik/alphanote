@@ -5,6 +5,8 @@ astroid==2.4.2
 autopep8==1.5.4
 bcrypt==3.2.0
 bleach==3.3.0
+boto3==1.17.39
+Brotli==1.0.9
 certifi==2020.12.5
 cffi==1.14.4
 chardet==4.0.0
@@ -21,6 +23,8 @@ django-extensions==3.1.1
 django-heroku==0.3.1
 django-mailer==2.1
 django-phonenumber-field==5.0.0
+django-sendgrid-v5==0.9.1
+django-storages==1.11.1
 django-summernote==0.8.11.6
 filelock==3.0.12
 flake8==3.8.4
