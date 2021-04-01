@@ -39,9 +39,9 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 # whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_HOST = 'https://d2f08mg0fh6n2l.cloudfront.net' if not DEBUG else ''
+STATIC_HOST = os.environ['STATIC_HOST'] if not DEBUG else ''
 STATIC_URL = STATIC_HOST + '/static/' if not DEBUG else '/static/'
-MEDIA_URL = '/media/'
+""" MEDIA_URL = '/media/' """
 
 # Database postgres
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
