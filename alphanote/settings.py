@@ -75,6 +75,7 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = os.environ.get('SG_API_KEY')
+DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 
 # site for django.contrib.sites app
 """ add django.contrib.sites to app """
@@ -86,7 +87,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
+
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
