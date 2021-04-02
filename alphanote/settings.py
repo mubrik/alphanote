@@ -165,21 +165,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 ALLOWED_HOSTS = ['alphanote-dev.eu-west-2.elasticbeanstalk.com', 'localhost']
 
 # adds aws elb private ip to allowed hosts
-def is_ec2_linux():
-    """Detect if we are running on an EC2 Linux Instance
-       See http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify_ec2_instances.html
-    """
-    if os.path.isfile("/sys/hypervisor/uuid"):
-        with open("/sys/hypervisor/uuid") as f:
-            uuid = f.read()
-            return uuid.startswith("ec2")
-    return False
-
 def get_linux_ec2_private_ip():
     """Get the private IP Address of the machine if running on an EC2 linux server"""
     import urllib
-    if not is_ec2_linux():
-        return None
     try:
         response = urllib.request.urlopen('http://169.254.169.254/latest/meta-data/local-ipv4')
         return response.read()
