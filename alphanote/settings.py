@@ -182,7 +182,8 @@ def get_linux_ec2_private_ip():
 """ private_ip = get_linux_ec2_private_ip()
 if private_ip:
     ALLOWED_HOSTS.append(private_ip) """
-print(get_linux_ec2_private_ip())
+import urllib
+print(urllib.request.urlopen('http://169.254.169.254/latest/meta-data/local-ipv4'))
 
 # Application definition
 # django_extensions for some model classes
