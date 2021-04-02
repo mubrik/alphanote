@@ -189,6 +189,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'django_extensions',
     'health_check',
+    'health_check.db',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
