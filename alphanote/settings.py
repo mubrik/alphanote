@@ -15,12 +15,11 @@ import os
 
 # my custom settings 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # using projectapp dir instead of base dir to host templates and static file
 PROJECTAPP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = Path.joinpath(PROJECTAPP_DIR, 'static')
-MEDIA_ROOT = Path.joinpath(PROJECTAPP_DIR, 'media')
 STATIC_ROOT = Path.joinpath(PROJECTAPP_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR, ]
 
@@ -39,9 +38,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 # whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_HOST = os.environ['STATIC_HOST'] if not DEBUG else ''
-STATIC_URL = STATIC_HOST + '/static/' if not DEBUG else '/static/'
-""" MEDIA_URL = '/media/' """
+STATIC_HOST = os.environ['STATIC_HOST']
+STATIC_URL = STATIC_HOST + '/static/' 
 
 # Database postgres
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
