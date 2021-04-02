@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+from .settings_scripts import get_linux_ec2_private_ip
 
 # my custom settings 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -163,6 +164,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = ['alphanote-dev.eu-west-2.elasticbeanstalk.com', 'localhost']
+
+# adds aws elb private ip to allowed hosts
+private_ip = get_linux_ec2_private_ip()
+if private_ip:
+    ALLOWED_HOSTS.append(private_ip)
 
 # Application definition
 # django_extensions for some model classes
