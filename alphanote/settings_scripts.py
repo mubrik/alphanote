@@ -10,14 +10,13 @@ def is_ec2_linux():
             return uuid.startswith("ec2")
     return False
 
+# adds aws elb private ip to allowed hosts
 def get_linux_ec2_private_ip():
     """Get the private IP Address of the machine if running on an EC2 linux server"""
-    import urllib
-    if not is_ec2_linux():
-        return None
+    from urllib.request import urlopen
     try:
-        response = urllib.request.urlopen('http://169.254.169.254/latest/meta-data/local-ipv4')
-        return response.read()
+        response = urlopen('http://169.254.169.254/latest/meta-data/local-ipv4')
+        return response.read().decode("utf-8")
     except:
         return None
     finally:
