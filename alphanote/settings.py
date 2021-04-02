@@ -38,7 +38,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 # whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_HOST = os.environ['STATIC_HOST']
+STATIC_HOST = os.environ['STATIC_HOST'] if not DEBUG else ''
 STATIC_URL = STATIC_HOST + '/static/' 
 
 # Database postgres
@@ -183,10 +183,10 @@ def get_linux_ec2_private_ip():
 # ElasticBeanstalk healthcheck sends requests with host header = internal ip
 # So we detect if we are in elastic beanstalk,
 # and add the instances private ip address
-
-private_ip = get_linux_ec2_private_ip()
-if private_ip:
-    ALLOWED_HOSTS.append(private_ip)
+if not DEBUG:
+    private_ip = get_linux_ec2_private_ip()
+    if private_ip:
+        ALLOWED_HOSTS.append(private_ip)
 
 
 # Application definition
