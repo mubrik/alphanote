@@ -179,9 +179,9 @@ def get_linux_ec2_private_ip():
 # ElasticBeanstalk healthcheck sends requests with host header = internal ip
 # So we detect if we are in elastic beanstalk,
 # and add the instances private ip address
-private_ip = get_linux_ec2_private_ip()
+""" private_ip = get_linux_ec2_private_ip()
 if private_ip:
-    ALLOWED_HOSTS.append(private_ip)
+    ALLOWED_HOSTS.append(private_ip) """
 
 # Application definition
 # django_extensions for some model classes
