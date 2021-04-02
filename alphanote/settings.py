@@ -167,10 +167,10 @@ ALLOWED_HOSTS = ['alphanote-dev.eu-west-2.elasticbeanstalk.com', 'localhost']
 # adds aws elb private ip to allowed hosts
 def get_linux_ec2_private_ip():
     """Get the private IP Address of the machine if running on an EC2 linux server"""
-    import urllib
+    from urllib.request import urlopen
     try:
-        response = urllib.request.urlopen('http://169.254.169.254/latest/meta-data/local-ipv4')
-        return response.read()
+        response = urlopen('http://169.254.169.254/latest/meta-data/local-ipv4')
+        return response.read().decode("utf-8")
     except:
         return None
     finally:
@@ -179,12 +179,10 @@ def get_linux_ec2_private_ip():
 # ElasticBeanstalk healthcheck sends requests with host header = internal ip
 # So we detect if we are in elastic beanstalk,
 # and add the instances private ip address
-""" private_ip = get_linux_ec2_private_ip()
+private_ip = get_linux_ec2_private_ip()
 if private_ip:
-    ALLOWED_HOSTS.append(private_ip) """
-from urllib.request import urlopen
-response = urlopen('http://169.254.169.254/latest/meta-data/local-ipv4')
-print(response.read().decode("utf-8"))
+    ALLOWED_HOSTS.append(private_ip)
+
 
 # Application definition
 # django_extensions for some model classes
