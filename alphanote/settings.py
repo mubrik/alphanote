@@ -16,7 +16,7 @@ from .settings_scripts import get_linux_ec2_private_ip
 
 # my custom settings 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # using projectapp dir instead of base dir to host templates and static file
 PROJECTAPP_DIR = Path(__file__).resolve().parent
@@ -39,7 +39,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 # whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_HOST = os.environ['STATIC_HOST'] if DEBUG else ''
+STATIC_HOST = os.environ['STATIC_HOST'] if not DEBUG else ''
 STATIC_URL = STATIC_HOST + '/static/' 
 
 # Database postgres
@@ -170,7 +170,7 @@ ALLOWED_HOSTS = [
 ]
 
 # adds aws elb private ip to allowed hosts
-private_ip = get_linux_ec2_private_ip()
+private_ip = get_linux_ec2_private_ip() if not DEBUG else None
 if private_ip:
     ALLOWED_HOSTS.append(private_ip)
 

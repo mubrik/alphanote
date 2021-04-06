@@ -23,7 +23,7 @@ class NoteHomeHandler(ListView):
         """Insert the list object into the context dict, also inserts note creation form into context"""
 
         context = super().get_context_data(**kwargs)
-        context.update({'form': CreateNoteForm(self.request.user,), 'form1': CreateNoteBookForm(),})
+        context.update({'form': CreateNoteForm(self.request.user, ), 'form1': CreateNoteBookForm(),})
         return context
 
     def get_queryset(self):

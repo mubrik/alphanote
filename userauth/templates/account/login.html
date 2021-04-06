@@ -26,25 +26,20 @@
       {{ error }}
     {% endfor %}
     {% endif %}
-    <div class="input-set">
-      {% for error in form.login.errors  %} {{ error }}{% endfor %}
-      <label class="input-set__label">Username:</label>
-      <div class="input-set__file">
-      {{ form.login }}
+    <div class="input-group">
+      <div class="input-set {% if form.username.errors %}invalid{% endif %}">
+        <label class="input-set__label">Username:</label>
+        <div class="input-set__file">{{ form.login }}</div>
       </div>
-    </div>
-    <div class="input-set">
-      {% for error in form.password.errors  %} {{ error }}{% endfor %}
-      <label class="input-set__label">Password:</label>
-      <div class="input-set__file">
-      {{ form.password }}
+      {{ form.login.errors }}
+      <div class="input-set {% if form.password.errors %}invalid{% endif %}">
+        <label class="input-set__label">Password:</label>
+        <div class="input-set__file">{{ form.password }}</div>
       </div>
-    </div>
-    <div class="input-set">
-      {{ form.remember.errors }}
-      <label class="input-set__label">Remember Me?:</label>
-      <div class="input-set__file">
-      {{ form.remember }}
+      {{ form.password.errors }}
+      <div class="input-set">
+        <label class="input-set__label">Remember Me?:</label>
+        <div class="input-set__file">{{ form.remember }}</div>
       </div>
     </div>
     {% if redirect_field_value %}

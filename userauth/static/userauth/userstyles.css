@@ -39,5 +39,17 @@
 .account-main > .account-footer {
   grid-area: footer;
 }
+@media (max-width: 600px) {
+  .account-main {
+    grid-template-areas: "welcome welcome" "login login" "social_login social_login" "footer footer";
+  }
+  .account-main > .account-body {
+    justify-self: center;
+  }
+  .account-main > .social-body {
+    justify-self: center;
+    border-top: 2px solid #5faedf;
+  }
+}
 
 /*# sourceMappingURL=userstyles.css.map */

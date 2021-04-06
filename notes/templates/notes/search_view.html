@@ -10,35 +10,39 @@
 {% endblock newitem %}
 
 {% block innermain %}
-<div class ="inner-main">
-  {% block body %}
-    {% for note in notes  %}
-      <div class="card-main" data-src="{{ note.id }}">
-        <div class="card-subject">{{ note.title }}</div>
-        <div class="card-content">{{ note.content | safe }}</div>
-        <div class="card-extras">
-          <a class="icon--edit fortesting" href="{{ note.get_absolute_url }}">Edit</a>
-          <button class="icon--delete delNote" href="{% url 'note_delete' note.id %}" data-bs="delNote">Delete</button>
-          <button class="icon--option opt-trigger" href="" data-bs="opt-trigger" data-bs="opt-trigger">Option</button>
-        </div>
-      </div>
-    {% endfor %}
+  {% if notes or notebooks %}
+    <div class ="inner-main">
+      {% block body %}
+        {% for note in notes  %}
+          <div class="card-main" data-src="{{ note.id }}">
+            <div class="card-subject">{{ note.title }}</div>
+            <div class="card-content">{{ note.content | safe }}</div>
+            <div class="card-extras">
+              <a class="icon--edit fortesting" href="{{ note.get_absolute_url }}">Edit</a>
+              <button class="icon--delete delNote" href="{% url 'note_delete' note.id %}" data-bs="delNote">Delete</button>
+              <button class="icon--option opt-trigger" href="" data-bs="opt-trigger" data-bs="opt-trigger">Option</button>
+            </div>
+          </div>
+        {% endfor %}
 
-    {% for notebook in notebooks  %}
-      <div class="card-main" data-src="{{ notebook.id }}">
-        <div class="card-subject">{{ notebook.name }}</div>
-        <div class="card-content">
-          {% for note in notebook.notes_query %}<a href="{{ note.get_absolute_url }}">{{ note.title }}</a>{% endfor %}
-        </div>
-        <div class="card-extras">
-          <a class="icon--accept" href="{{ notebook.get_absolute_url }}">View</a>
-          <button class="icon--delete delNotebook" href="#"></button>
-        </div>
-      </div>
-    {% endfor %}
+        {% for notebook in notebooks  %}
+          <div class="card-main" data-src="{{ notebook.id }}">
+            <div class="card-subject">{{ notebook.name }}</div>
+            <div class="card-content">
+              {% for note in notebook.notes_query %}<a href="{{ note.get_absolute_url }}">{{ note.title }}</a>{% endfor %}
+            </div>
+            <div class="card-extras">
+              <a class="icon--accept" href="{{ notebook.get_absolute_url }}">View</a>
+              <button class="icon--delete delNotebook" href="#"></button>
+            </div>
+          </div>
+        {% endfor %}
 
-  {% endblock body %}
-</div>
+      {% endblock body %}
+    </div>
+  {% else %}
+    {% include "notes/empty_card.html" %}
+  {% endif %}
 {% endblock innermain %}
 
 {% block modalblock %}
@@ -47,26 +51,7 @@
       <h5 class="modal-title">New Note</h5>
     </div>
     <div class="modal-body">
-      <form method="POST" name='NoteModalForm' id="NoteModalForm" action="{% url 'note_home' %}">
-        {% csrf_token %}
-        {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-        {% endfor %}
-        <div class="input-field">
-          {{ form.content.errors }}
-          {{ form.content }}
-        </div>
-        <div class="input-field">
-          {{ form.title.errors }}
-          {{ form.title }}
-          {{ form.title.label_tag }}
-        </div>
-        <div class="input-select">
-          {{ form.notebook.errors }}
-          {{ form.notebook.label_tag }}
-          {{ form.notebook }}
-        </div>
-      </form>
+      {% include 'notes/note_modal.html' %}
     </div>
     <div class="modal-footer">
       <button type="button" class="bttn--base modal-close" data-bs-dismiss="modal">Cancel</button>
@@ -81,17 +66,7 @@
       <h5 class="modal-title">New NoteBook</h5>
     </div>
     <div class="modal-body">
-      <form method="POST" name='NoteBookModalForm' id="NoteBookModalForm" action="{% url 'notebook_new' %}">
-        {% csrf_token %}
-        {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-        {% endfor %}
-        <div class="input-field">
-          {{ form1.name.errors }}
-          {{ form1.name }}
-          {{ form1.name.label_tag }}
-        </div>
-      </form>
+      {% include 'notebooks/notebook_modal.html' %}
     </div>
     <div class="modal-footer">
       <button type="button" class="bttn--base modal-close" data-bs-dismiss="modal">Cancel</button>
@@ -101,29 +76,7 @@
 {% endblock modalblock2 %}
 
 {% block fixedbutton %}
-  <div class="fixed-action-btn">
-      <a href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="45" fill="rgb(199, 30, 24)" class="bi bi-plus-circle" viewBox="0 0 16 16">
-          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
-      </a>
-      <ul>
-        <li><a class="modal-trigger" data-target="notebookModal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(204, 97, 20)" class="bi bi-journals" viewBox="0 0 16 16">
-            <path d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z"/>
-            <path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z"/>
-          </svg>
-        </a></li>
-        <li><a class="modal-trigger" data-target="noteModal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(204, 97, 20)" class="bi bi-journal-plus" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
-            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-          </svg>
-        </a></li>
-      </ul>
-    </div>
+  {% include "notes/fixed_button.html" %}
 {% endblock fixedbutton %}
 
 {% block script %}

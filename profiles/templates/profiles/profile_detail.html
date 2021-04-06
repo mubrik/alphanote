@@ -8,7 +8,7 @@
 {% block innermain %}
 <div class ="inner-main">
 
-  {% block body %}
+{% block body %}
   <div class="wrapper-base mflex flex-col" style="height:100vh;">
     <div class="profile-main">
       <div class="profile-card">
@@ -36,15 +36,17 @@
           {% for hidden in form.hidden_fields %}
           {{ hidden }}
           {% endfor %}
-          <div class="input-set">
-            {{ form.birth_date.errors }}
-            <label class="input-set__label">Birth Date:</label>
-            <div class="input-set__file">
-            {{ form.birth_date }}
+          <div class="input-group">
+            <div class="input-set">
+              {{ form.birth_date.errors }}
+              <label class="input-set__label">Birth Date:</label>
+              <div class="input-set__file">
+              {{ form.birth_date }}
+              </div>
             </div>
-          </div>
-          {{ form.profile_picture.errors }}
           {{ form.profile_picture }}
+          {{ form.profile_picture.errors }}
+          </div>
           <button class="bttn--base" type="submit">Update Profile</button>
         </form>
       {% endblock extendform %}
@@ -58,7 +60,7 @@
       </div>
     </div>
   </div>
-  {% endblock body %}
+{% endblock body %}
 
 </div>
 {% endblock innermain %}

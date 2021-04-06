@@ -327,7 +327,6 @@ body {
 }
 .nav--bttn__stretch {
   border: 0;
-  width: -webkit-fill-available;
 }
 .nav--bttn__stretch::before {
   content: url("../bs_icons/pencil-square.svg");
@@ -348,6 +347,23 @@ body {
   max-height: 250px;
   width: calc((100% / 2) - 15px);
   margin: 0.3em 0.5em;
+}
+.card-main.empty {
+  background-color: #8EC5FC;
+  background-image: linear-gradient(62deg, #8EC5FC 0%, #d3cedc 100%);
+  cursor: unset;
+  margin-top: 5%;
+  max-height: 300px;
+  height: 300px;
+  width: 270px;
+}
+.card-main.empty .card-subject {
+  justify-self: center;
+}
+.card-main.empty .card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .card-main .card-subject {
   padding: 0.3em;
@@ -463,16 +479,31 @@ body {
   /* Hidden by default */
   position: fixed;
   /* Stay in place */
-  margin-left: calc(100vw - 86%);
+  margin-left: calc(100vw - 88%);
   padding: 1em 1em;
   overflow-y: auto;
   border-radius: 5px;
   will-change: top, opacity;
   background-color: #e9eeef;
-  width: 70%;
+  width: 80%;
   height: fit-content;
   /* The Close Button */
   /* Small devices (portrait tablets and large phones, 600px and up) */
+}
+.modal .modal-note {
+  padding: 0.1em 0.1em;
+  background: inherit;
+  width: 100%;
+}
+.modal .modal-note .input-select {
+  border-bottom: 1px solid rgba(118, 166, 173, 0.5);
+}
+.modal .modal-note .note-editing-area {
+  background: linear-gradient(92deg, white 43%, #ebeef3 88%);
+}
+.modal .modal-note .note-editable {
+  min-height: fit-content !important;
+  max-height: 55vh !important;
 }
 .modal .modal-header {
   padding: 0.3em 0;
@@ -482,20 +513,32 @@ body {
 }
 .modal .modal-body {
   padding: 0.2em 0;
-}
-.modal .modal-body .note-form {
-  box-shadow: none;
-  padding: 0.1em 0.1em;
-  background: inherit;
-  width: 100%;
-}
-.modal .modal-body .note-form .note-editing-area {
-  background: linear-gradient(92deg, white 43%, #ebeef3 88%);
-  height: 38vh;
-}
-.modal .modal-body #NoteModalForm .note-editing-area {
-  background: linear-gradient(92deg, white 43%, #ebeef3 88%);
-  height: 38vh;
+  /* .note-form {
+    box-shadow: none;
+    padding: .1em .1em;
+    background: inherit;
+    width: 100%;
+
+    .note-editing-area {
+      background: linear-gradient(92deg, rgb(255, 255, 255) 43%, rgb(235 238 243) 88%);
+    }
+
+    .note-editable {
+      min-height: fit-content !important;
+      max-height: 55vh !important;
+    }
+  }
+
+  #NoteModalForm {
+    .note-editing-area {
+      background: linear-gradient(92deg, rgb(255, 255, 255) 43%, rgb(235 238 243) 88%);
+    }
+
+    .note-editable {
+      min-height: fit-content !important;
+      max-height: 55vh !important;
+    }
+  } */
 }
 .modal .modal-footer {
   display: flex;
@@ -510,11 +553,6 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-}
-@media (max-width: 600px) {
-  .modal .note-editable {
-    height: 40vh;
-  }
 }
 .modal-overlay {
   position: fixed;
@@ -533,8 +571,10 @@ body {
 .opt-content {
   display: none;
   align-content: stretch;
-  grid-template-rows: 1fr 0.2fr;
+  grid-template-rows: 1fr 0.1fr;
   background-color: #fbffff;
+  box-shadow: -1px 1px 5px 1px rgba(142, 142, 142, 0.75);
+  border-radius: 3px 3px 3px 3px;
 }
 .opt-content .opt-body {
   padding: 0.3em 0.4em;
@@ -614,7 +654,7 @@ body {
 
 .fixed-action-btn {
   position: fixed;
-  right: 80px;
+  right: 50px;
   bottom: 30px;
   padding-top: 15px;
   margin-bottom: 0;
@@ -744,7 +784,7 @@ body {
   border-color: transparent transparent transparent black;
 }
 
-/* Tooltip text */
+/* Tooltip text*/
 .tooltip > .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -753,7 +793,6 @@ body {
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
-  /* Position the tooltip text - see examples below! */
   right: 55px;
   top: 25px;
   position: absolute;
@@ -851,32 +890,41 @@ body {
   display: flex;
   flex: 1 2 auto;
   flex-wrap: nowrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 0.2em;
+  padding: 0 0.3em;
+  overflow: hidden;
 }
 .wrapper-nav .nav-main .form-search {
-  margin-left: 4em;
+  min-width: 50%;
 }
-.wrapper-nav .nav-main .mg-l {
-  margin-left: auto;
-}
-.wrapper-nav .nav-main .nav--bttn {
+.wrapper-nav .nav-main .nav--bttn,
+.wrapper-nav .nav-main .nav--bttn__dropdown,
+.wrapper-nav .nav-main .nav--bttn__profile {
   display: none;
 }
-.wrapper-nav .nav-main #single-dropdown {
+.wrapper-nav .nav-main #single-dropdown,
+.wrapper-nav .nav-main #loginbtn,
+.wrapper-nav .nav-main #signupbtn {
   display: inline-flex;
-  width: 20%;
 }
-.wrapper-nav .nav-main .nav--bttn__stretch {
-  /* animation-name: breathing-element;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-  animation-delay: 0ms;
-  animation-iteration-count: infinite; 
-  animation-direction: reverse; */
-  transition: opacity 0.3s, transform 0.3s;
-  animation: breathing-element 5.5s linear 0ms alternate infinite;
+@media (min-width: 768px) {
+  .wrapper-nav .nav-main {
+    justify-content: center;
+  }
+  .wrapper-nav .nav-main .nav--bttn,
+.wrapper-nav .nav-main .nav--bttn__dropdown,
+.wrapper-nav .nav-main .nav--bttn__profile,
+.wrapper-nav .nav-main .nav--bttn__logout {
+    display: inline-flex;
+    margin: 0 0.5em;
+  }
+  .wrapper-nav .nav-main .form-search {
+    margin: 0 2em;
+  }
+  .wrapper-nav .nav-main #single-dropdown {
+    display: none;
+  }
 }
 
 .dropdown-content {
@@ -1038,6 +1086,127 @@ ul:not(.browser-default) > li {
   margin: 2px 2px;
 }
 
+.inner-empty {
+  padding: 0.3em 0.1em;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.wrapper-footer {
+  position: relative;
+  background-color: rgba(251, 255, 255, 0.856);
+  border-top: 1px ridge #033840;
+  border-right: 1px ridge #033840;
+  border-left: 1px ridge #033840;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -0.2em rgba(84, 142, 150, 0.4);
+  padding: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-top: 0.5em;
+  display: none;
+}
+
+input[type=checkbox]:not(.browser-default) {
+  cursor: pointer;
+}
+
+input:not([type]),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea.materialize-textarea {
+  border: none;
+  border-radius: 0;
+  outline: none;
+  height: 2rem;
+  width: 100%;
+  background-color: inherit;
+  font-family: inherit;
+  font-size: 1em;
+  margin: 0 0 1px 0;
+  padding: 0;
+  box-shadow: none;
+  box-sizing: content-box;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+/* Search Field */
+.input-field input[type=search] {
+  display: block;
+  line-height: inherit;
+  background-color: inherit;
+  font-family: inherit;
+  height: 3.2em;
+  margin: 0 0 1px 0;
+  border-bottom: 1px solid #ccb578;
+  transition: 0.3s background-color;
+}
+.input-field input[type=search]:focus:not(.browser-default) {
+  border-bottom: 1px solid #84c8dd;
+  background-color: #fbfbfb;
+  box-shadow: none;
+  color: #444;
+}
+
+.input-select {
+  margin: 1rem 0;
+}
+.input-select #field_notebook,
+.input-select #id_notebook {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.input-select #field_notebook li,
+.input-select #id_notebook li {
+  margin: 0.1em 0.3em;
+}
+.input-select #field_notebook label,
+.input-select #id_notebook label {
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+.input-select #field_notebook label input,
+.input-select #id_notebook label input {
+  margin-right: 0.3em;
+}
+
+.input-field {
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(118, 166, 173, 0.5);
+}
+.input-field > label {
+  color: #615c5c;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1rem;
+  cursor: text;
+  transition: transform 0.2s ease-out, color 0.2s ease-out;
+  transform-origin: 0% 100%;
+  text-align: initial;
+  transform: translateY(8px);
+}
+.input-field > label:not(.label-icon).active {
+  transform: translateY(-14px) scale(0.8);
+  transform-origin: 0 0;
+}
+
 .note-form {
   box-shadow: 0px 0px 5px 1px rgba(50, 50, 50, 0.75);
   background: linear-gradient(120deg, #edfbff 54%, #d7eaf7 70%);
@@ -1073,120 +1242,65 @@ ul:not(.browser-default) > li {
   }
 }
 
-.wrapper-footer {
-  position: relative;
-  background-color: rgba(251, 255, 255, 0.856);
-  border-top: 1px ridge #033840;
-  border-right: 1px ridge #033840;
-  border-left: 1px ridge #033840;
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 -0.2em rgba(84, 142, 150, 0.4);
-  padding: 0.5em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  margin-top: 0.5em;
-  display: none;
+/* .input-field.inline {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
 }
-
-.input-select {
-  margin: 1rem 0;
-}
-.input-select #field_notebook,
-.input-select #id_notebook {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.input-select #field_notebook li,
-.input-select #id_notebook li {
-  margin: 0.1em 0.3em;
-}
-.input-select #field_notebook label,
-.input-select #id_notebook label {
-  display: inline-flex;
-  text-align: center;
-  align-items: center;
-  cursor: pointer;
-}
-.input-select #field_notebook label input,
-.input-select #id_notebook label input {
-  margin-right: 0.3em;
-}
-
-.input-field {
-  position: relative;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.input-field.inline {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 5px;
-}
-
 .input-field.inline input,
 .input-field.inline .select-dropdown {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .input-field.col label {
-  left: 0.75rem;
+    left: 0.75rem;
 }
-
 .input-field.col .prefix ~ label,
 .input-field.col .prefix ~ .validate ~ label {
-  width: calc(100% - 3rem - 1.5rem);
+    width: calc(100% - 3rem - 1.5rem);
 }
-
 .input-field > label {
-  color: #615c5c;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 1rem;
-  cursor: text;
-  transition: transform 0.2s ease-out, color 0.2s ease-out;
-  transform-origin: 0% 100%;
-  text-align: initial;
-  transform: translateY(8px);
+    color: #615c5c;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1rem;
+    cursor: text;
+    transition: transform 0.2s ease-out, color 0.2s ease-out;
+    transform-origin: 0% 100%;
+    text-align: initial;
+    transform: translateY(8px);
 }
-
 .input-field > label:not(.label-icon).active {
-  transform: translateY(-14px) scale(0.8);
-  transform-origin: 0 0;
+    transform: translateY(-14px) scale(0.8);
+    transform-origin: 0 0;
 }
-
 .input-field > input[type]:-webkit-autofill:not(.browser-default):not([type=search]) + label, .input-field > input[type=date]:not(.browser-default) + label, .input-field > input[type=time]:not(.browser-default) + label {
-  transform: translateY(-14px) scale(0.8);
-  transform-origin: 0 0;
+    transform: translateY(-14px) scale(0.8);
+    transform-origin: 0 0;
 }
-
 .input-field .helper-text {
-  position: relative;
-  min-height: 18px;
-  display: block;
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.54);
+    position: relative;
+    min-height: 18px;
+    display: block;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.54);
 }
-
 .input-field .helper-text::after {
-  opacity: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-
 .input-field .prefix {
-  position: absolute;
-  width: 3rem;
-  font-size: 2rem;
-  transition: color 0.2s;
-  top: 0.5rem;
+    position: absolute;
+    width: 3rem;
+    font-size: 2rem;
+    transition: color 0.2s;
+    top: 0.5rem;
 }
-
 .input-field .prefix.active {
-  color: #26a69a;
+    color: #26a69a;
 }
 
 .input-field .prefix ~ input,
@@ -1195,136 +1309,80 @@ ul:not(.browser-default) > li {
 .input-field .prefix ~ .validate ~ label,
 .input-field .prefix ~ .helper-text,
 .input-field .prefix ~ .autocomplete-content {
-  margin-left: 3rem;
-  width: 92%;
-  width: calc(100% - 3rem);
+    margin-left: 3rem;
+    width: 92%;
+    width: calc(100% - 3rem);
 }
-
 .input-field .prefix ~ label {
-  margin-left: 3rem;
+    margin-left: 3rem;
+}
+@media only screen and (max-width : 992px) {
+    .input-field .prefix ~ input {
+      width: 86%;
+      width: calc(100% - 3rem);
+    }
 }
 
-@media only screen and (max-width: 992px) {
-  .input-field .prefix ~ input {
-    width: 86%;
-    width: calc(100% - 3rem);
-  }
+@media only screen and (max-width : 600px) {
+    .input-field .prefix ~ input {
+      width: 80%;
+      width: calc(100% - 3rem);
+    }
+} */
+/* .input-field input[type=search]:focus:not(.browser-default) {
+    border-bottom: 1px solid rgb(132, 200, 221);
+    background-color: rgb(251 251 251);
+    box-shadow: none;
+    color: #444;
+} */
+/* .input-field input[type=search]:focus:not(.browser-default) + label i, .input-field input[type=search]:focus:not(.browser-default) ~ .mdi-navigation-close, .input-field input[type=search]:focus:not(.browser-default) ~ .material-icons {
+    color: #444;
 }
-@media only screen and (max-width: 600px) {
-  .input-field .prefix ~ input {
-    width: 80%;
-    width: calc(100% - 3rem);
-  }
-}
-input[type=checkbox]:not(.browser-default) {
-  cursor: pointer;
-}
-
-input:not([type]),
-input[type=text]:not(.browser-default),
-input[type=password]:not(.browser-default),
-input[type=email]:not(.browser-default),
-input[type=url]:not(.browser-default),
-input[type=time]:not(.browser-default),
-input[type=date]:not(.browser-default),
-input[type=datetime]:not(.browser-default),
-input[type=datetime-local]:not(.browser-default),
-input[type=tel]:not(.browser-default),
-input[type=number]:not(.browser-default),
-input[type=search]:not(.browser-default),
-textarea.materialize-textarea {
-  border: none;
-  border-bottom: 1px solid #9e9e9e;
-  border-radius: 0;
-  outline: none;
-  height: 2rem;
-  width: 100%;
-  background-color: inherit;
-  font-family: inherit;
-  font-size: 1em;
-  margin: 0 0 1px 0;
-  padding: 0;
-  box-shadow: none;
-  box-sizing: content-box;
-  transition: box-shadow 0.3s, border 0.3s;
-}
-
-/* Search Field */
-.input-field input[type=search] {
-  display: block;
-  line-height: inherit;
-  background-color: inherit;
-  font-family: inherit;
-  height: 2.7rem;
-  margin: 0 0 4px 0;
-  transition: 0.3s background-color;
-}
-
-.nav-wrapper .input-field input[type=search] {
-  height: inherit;
-  padding-left: 4rem;
-  width: calc(100% - 4rem);
-  border: 0;
-  box-shadow: none;
-}
-
-.input-field input[type=search]:focus:not(.browser-default) {
-  background-color: #fff;
-  border: 0;
-  box-shadow: none;
-  color: #444;
-}
-
-.input-field input[type=search]:focus:not(.browser-default) + label i, .input-field input[type=search]:focus:not(.browser-default) ~ .mdi-navigation-close, .input-field input[type=search]:focus:not(.browser-default) ~ .material-icons {
-  color: #444;
-}
-
 .input-field input[type=search] + .label-icon {
-  transform: none;
-  left: 1rem;
+    transform: none;
+    left: 1rem;
+} */
+/* .input-field input[type=search] ~ .mdi-navigation-close, .input-field input[type=search] ~ .material-icons {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    color: transparent;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: 0.3s color;
+} */
+/* .nav-wrapper .input-field input[type=search] {
+    height: inherit;
+    padding-left: 4rem;
+    width: calc(100% - 4rem);
+    border: 0;
+    box-shadow: none;
+} */
+/* nav .input-field {
+    margin: 0;
+    height: 100%;
 }
-
-.input-field input[type=search] ~ .mdi-navigation-close, .input-field input[type=search] ~ .material-icons {
-  position: absolute;
-  top: 0;
-  right: 1rem;
-  color: transparent;
-  cursor: pointer;
-  font-size: 2rem;
-  transition: 0.3s color;
-}
-
-nav .input-field {
-  margin: 0;
-  height: 100%;
-}
-
 nav .input-field input {
-  height: 100%;
-  font-size: 1.2rem;
-  border: none;
-  padding-left: 2rem;
+    height: 100%;
+    font-size: 1.2rem;
+    border: none;
+    padding-left: 2rem;
 }
-
 nav .input-field input:focus, nav .input-field input[type=text]:valid, nav .input-field input[type=password]:valid, nav .input-field input[type=email]:valid, nav .input-field input[type=url]:valid, nav .input-field input[type=date]:valid {
-  border: none;
-  box-shadow: none;
+    border: none;
+    box-shadow: none;
 }
-
 nav .input-field label {
-  top: 0;
-  left: 0;
+    top: 0;
+    left: 0;
 }
-
 nav .input-field label i {
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.3s;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s;
 }
-
 nav .input-field label.active i {
-  color: #fff;
-}
-
+    color: #fff;
+} */
 @media (max-width: 600px) {
   .card-main {
     width: calc((100% / 2) - 15px);
@@ -1342,13 +1400,6 @@ nav .input-field label.active i {
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media (min-width: 768px) {
-  .wrapper-nav .nav-main .nav--bttn {
-    display: inline-flex;
-  }
-  .wrapper-nav .nav-main #single-dropdown {
-    display: none;
-  }
-
   .card-main {
     width: calc((100% / 4) - 15px);
   }

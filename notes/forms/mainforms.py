@@ -32,7 +32,7 @@ class CreateNoteForm(forms.ModelForm):
 
     def __init__(self, user=None, *args, **kwargs):
         super(CreateNoteForm, self).__init__(*args, **kwargs)
-        self.fields['content'].widget = SummernoteInplaceWidget(attrs={'summernote': {'width': '100%', 'height': 'inherit'}})
+        self.fields['content'].widget = SummernoteInplaceWidget(attrs={'summernote': {'width': '100%', }})
         if user:
             self.fields['notebook'].queryset = UserModel.objects.get(username=user.username).created_notebooks.all()
             self.fields['notebook'].label = 'Notebooks:'
@@ -43,6 +43,5 @@ class CustomNotebookForm(CreateNoteForm):
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(user, *args, **kwargs)
         self.auto_id = 'id_for_%s'
-        """ del self.fields['title'] """
         del self.fields['content']
     

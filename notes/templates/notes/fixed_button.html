@@ -1,0 +1,26 @@
+<div class="fixed-action-btn tooltip">
+  <span class="tooltiptext" {% if not item  %} style="visibility: visible;"{% endif %}>New Item</span>
+    <a href="#">
+      <svg width="45" height="45"  viewBox="-1 -1 18 18">
+        <path fill="none" fill-rule="evenodd" stroke="#97233F" stroke-width="0.5" d="M8,15A7,7,0,1,1,8,1a7,7,0,0,1,0,14zm0,1A8,8,0,1,0,8,0a8,8,0,0,0,0,16z"/>
+        <path fill="none" fill-rule="evenodd" stroke="#97233F" stroke-width="0.5" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+      </svg>
+    </a>
+    <ul>
+      <li><a class="modal-trigger tooltip" data-target="notebookModal">
+        <span class="tooltiptext">New Notebook</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(204, 97, 20)" class="bi bi-journals" viewBox="0 0 16 16">
+          <path d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z"/>
+          <path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z"/>
+        </svg>
+      </a></li>
+      <li><a class="modal-trigger tooltip" data-target="noteModal">
+        <span class="tooltiptext">New Note</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(204, 97, 20)" class="bi bi-journal-plus" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
+          <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+          <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+        </svg>
+      </a></li>
+    </ul>
+</div>

@@ -170,6 +170,7 @@ class OptionHandler {
     this.isOpen = false;
     this.onCardObj = null;
     this.optionType = null;
+    this.lastCardElemOpened = null;
   }
 
 
@@ -177,15 +178,24 @@ class OptionHandler {
   * @param {Card} cardObj - The card object
   */
   showOption (cardObj) {
+    let height = "228px"
+    if (this.lastCardElemOpened) this.lastCardElemOpened.style = '';
+    cardObj.cardElement.style.cssText += ';' + 'overflow: visible;'
     cardObj.cardElement.prepend(this.optionContainer);
     this.optionContainer.style.cssText += ';' + `display: grid; position: absolute;
-    height: 100%; width: 100%; z-index: 3;`
+    height: ${height}; width: 100%; z-index: 3; transform: scaleX(0.4) scaleY(0.4);`
+    animator.animate('', 'option')
     this.isOpen = true;
     this.onCardObj = cardObj.cardSrc;
+    this.lastCardElemOpened = cardObj.cardElement;
   }
 
   /* close option menu */
   closeOption () {
+    if (this.lastCardElemOpened) {
+      this.lastCardElemOpened.style.cssText = '';
+      this.lastCardElemOpened = null;
+    } 
     this.optionContainer.style.cssText = '';
     this.clearOption()
     this.isOpen = false;
@@ -227,14 +237,14 @@ class OptionHandler {
     this.optionBody.innerHTML = '<p>Delete this Note?</p>';
     const button = `<button type="button" class="btn bttn--choice__yes" data-bs="delConfirm" data-target="${url}"><span>Yes</span>
                     <div class="icon" data-bs="delConfirm">
-                      <i class="initial bi bi-check-square" data-bs="delConfirm"></i>
-                      <i class="after bi bi-check-square-fill" data-bs="delConfirm"></i>
+                      <i class="initial fas fa-check" data-bs="delConfirm"></i>
+                      <i class="after fas fa-check-square" data-bs="delConfirm"></i>
                     </div>
                     </button>
                     <button type="button" class="btn bttn--choice__no" data-bs="delCancel" data-target="${url}"><span>No</span>
                     <div class="icon" data-bs="delCancel">
-                      <i class="initial bi bi-x-circle" data-bs="delCancel"></i>
-                      <i class="after bi bi-x-circle-fill" data-bs="delCancel"></i>
+                      <i class="initial far fa-times-circle" data-bs="delCancel"></i>
+                      <i class="after fas fa-times-circle" data-bs="delCancel"></i>
                     </div>
                     </button>`
     this.optionFooter.innerHTML = button;
@@ -245,14 +255,14 @@ class OptionHandler {
     let form = await resourcer.newRequest('GET', `${document.location.origin}/notes/update/${cardObj.cardSrc}/`)
     const button = `<button type="button" class="btn bttn--choice__yes" data-bs="noteUpdate"><span>Update</span>
                     <div class="icon" data-bs="noteUpdate">
-                      <i class="initial bi bi-check-square" data-bs="noteUpdate"></i>
-                      <i class="after bi bi-check-square-fill" data-bs="noteUpdate"></i>
+                      <i class="initial fas fa-check" data-bs="noteUpdate"></i>
+                      <i class="after fas fa-check-square" data-bs="noteUpdate"></i>
                     </div>
                     </button>
                     <button type="button" class="btn bttn--choice__no" data-bs="noteCancel"><span>Cancel</span>
                     <div class="icon" data-bs="noteCancel">
-                      <i class="initial bi bi-x-circle" data-bs="noteCancel"></i>
-                      <i class="after bi bi-x-circle-fill" data-bs="noteCancel"></i>
+                      <i class="initial far fa-times-circle" data-bs="noteCancel"></i>
+                      <i class="after fas fa-times-circle" data-bs="noteCancel"></i>
                     </div>
                     </button>`
     this.optionBody.innerHTML = form.ok? form.response : '<div> Error fetching notebooks </div>'
@@ -529,41 +539,72 @@ class AnimationHandler {
   */
   constructor (anime) {
     this.animeobj = anime;
-    this.deleteAnimation = {targets: 'ELEM',
-                              translateY: [
-                                {value: 30, duration: 200, easing: 'easeOutCubic'},
-                                {value: 0, duration: 300, delay: 200, easing: 'easeOutCubic'}
-                              ],
-                              scale: [
-                                {value: 0, duration: 300, delay: 500, easing: 'linear'}
-                              ]
-                            }
+    this.deleteAnimation = {
+      targets: null,
+      translateY: [
+        {value: 30, duration: 200, easing: 'easeOutCubic'},
+        {value: 0, duration: 300, delay: 200, easing: 'easeOutCubic'}
+      ],
+      scale: [
+        {value: 0, duration: 300, delay: 500, easing: 'linear'}
+      ]
+    }
+    this.emptySvgAnimation = {
+      targets: null,
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutSine',
+      duration: 1600,
+      direction: 'alternate',
+      loop: true
+    }
+    this.emptySvgContainerAnimation = {
+      targets: null,
+      loop: true,
+      easing: 'easeInOutSine',
+      scale: 1.1,
+      direction: 'alternate',
+      duration: 1500
+    }
+    this.optionAnimation = {
+      targets: null,
+      scaleX: [{ value: 1, duration: 300, easing: 'easeOutElastic' }],
+      scaleY: [{ value: 1.1, duration: 300, easing: 'easeOutElastic' }],
+      translateY : [{ value: 10, duration: 300, delay: 150, easing: 'easeOutElastic' }],
+      duration: 500
+    }
   }
 
   /**
   * @param {Element} elem - The Element to be animated
   * @param {String} type - Animation Type
   */
-  async animate (elem, type) {
+  async animate (...kwargs) {
+    let elem = kwargs[0];
+    let opType = kwargs[1];
 
     // select animation to be applied
-    switch (type) {
+    switch (opType) {
       case 'DELETE':
         this.deleteAnimation['targets'] = elem;
+        anime(this.deleteAnimation)
+        elem.remove()
+        break;
+      
+      case 'emptyPage':
+        this.emptySvgAnimation['targets'] = document.querySelector('#emptysvg').querySelectorAll('path');
+        this.emptySvgContainerAnimation['targets'] = document.querySelector('#emptysvg')
+        anime(this.emptySvgAnimation)
+        anime(this.emptySvgContainerAnimation)
+        break;
+      
+      case 'option':
+        this.optionAnimation['targets'] = document.querySelector('.opt-content');
+        anime(this.optionAnimation)
         break;
     
       default:
         break;
     }
-
-    // start and await animation
-    let animationResult = anime(this.deleteAnimation);
-    await animationResult.finished
-    elem.remove()
-
-    // always return a promise, catch errors
-    return animationResult;
-
   }
 }
 
@@ -572,7 +613,7 @@ $('.dropdown-trigger').dropdown();
 document.addEventListener('DOMContentLoaded', function() {
   var modalElems = document.querySelectorAll('.modal');
   var stickyElems = document.querySelectorAll('.fixed-action-btn');
-  var modalOptions = {'dismissible': true, 'startingTop':'2%', 'endingTop': '6%'}
+  var modalOptions = {'dismissible': true, 'startingTop':'2%', 'endingTop': '4%'}
   var stickyOptions = {'direction': 'top', 'hoverEnabled': false}
   var modalInstances = M.Modal.init(modalElems, modalOptions);
   var stickyInstances = M.FloatingActionButton.init(stickyElems, stickyOptions);

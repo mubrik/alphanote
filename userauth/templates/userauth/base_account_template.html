@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     <script src="{% static 'scripts/jquery/jquery-3.5.1.min.js' %}"> </script>
     <script src="https://kit.fontawesome.com/7355da5ce4.js" crossorigin="anonymous"></script>
-    {% comment %} <link href="{% static 'bs_icons/bootstrap-icons.css' %}" rel="stylesheet" /> {% endcomment %}
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
     <link href="{% static 'profiles/profilestyles.css' %}" rel="stylesheet" />
     <link href="{% static 'userauth/bootstrap-social.css' %}" rel="stylesheet" />
@@ -32,8 +31,8 @@
                 <a class="nav--bttn__profile mg-l" href="{% url 'profile_detail' %}"> Profile </a>
                 <a href="#" class="nav--bttn__logout modal-trigger account-trigger" data-target="account-modal" data-url="{% url 'account_logout' %}" data-bs="logout">Logout</a>
             {% else %}
-                <a class="nav--bttn" href="{% url 'account_login' %}"> Login </a>
-                <a class="nav--bttn" href="{% url 'account_signup' %}"> Signup </a>
+                <a class="nav--bttn" href="{% url 'account_login' %}" id="loginbtn"> Login </a>
+                <a class="nav--bttn" href="{% url 'account_signup' %}" id="signupbtn"> Signup </a>
             {% endif %}
             </div>
         </nav>

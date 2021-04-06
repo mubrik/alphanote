@@ -33,26 +33,7 @@
       <h5 class="modal-title">New Note</h5>
     </div>
     <div class="modal-body">
-      <form method="POST" name='NoteModalForm' id="NoteModalForm" action="{% url 'note_home' %}">
-        {% csrf_token %}
-        {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-        {% endfor %}
-        <div class="input-field">
-          {{ form.content.errors }}
-          {{ form.content }}
-        </div>
-        <div class="input-field">
-          {{ form.title.errors }}
-          {{ form.title }}
-          {{ form.title.label_tag }}
-        </div>
-        <div class="input-select">
-          {{ form.notebook.errors }}
-          {{ form.notebook.label_tag }}
-          {{ form.notebook }}
-        </div>
-      </form>
+      {% include 'notes/note_modal.html' %}
     </div>
     <div class="modal-footer">
       <button type="button" class="bttn--base modal-close" data-bs-dismiss="modal">Cancel</button>
@@ -67,17 +48,7 @@
       <h5 class="modal-title">New NoteBook</h5>
     </div>
     <div class="modal-body">
-      <form method="POST" name='NoteBookModalForm' id="NoteBookModalForm" action="{% url 'notebook_new' %}">
-        {% csrf_token %}
-        {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-        {% endfor %}
-        <div class="input-field">
-          {{ form1.name.errors }}
-          {{ form1.name }}
-          {{ form1.name.label_tag }}
-        </div>
-      </form>
+      {% include 'notebooks/notebook_modal.html' %}
     </div>
     <div class="modal-footer">
       <button type="button" class="bttn--base modal-close" data-bs-dismiss="modal">Cancel</button>

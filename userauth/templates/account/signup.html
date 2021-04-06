@@ -17,42 +17,33 @@
     {% for hidden in form.hidden_fields %}
     {{ hidden }}
     {% endfor %}
-    <div class="input-set">
-      {{ form.username.errors }}
-      <label class="input-set__label">Username:</label>
-      <div class="input-set__file">
-      {{ form.username }}
+    <div class="input-group">
+      <div class="input-set {% if form.username.errors %}invalid{% endif %}">
+        <label class="input-set__label">Username:</label>
+        <div class="input-set__file">{{ form.username }}</div>
       </div>
-    </div>
-    <div class="input-set">
-      {{ form.email.errors }}
-      <label class="input-set__label">Email:</label>
-      <div class="input-set__file">
-      {{ form.email }}
+        {{ form.username.errors }}
+      <div class="input-set {% if form.email.errors %}invalid{% endif %}">
+        <label class="input-set__label">Email:</label>
+        <div class="input-set__file">{{ form.email }}</div>
       </div>
-    </div>
-    <div class="input-set">
-      {{ form.password1.errors }}
-      <label class="input-set__label">Password:</label>
-      <div class="input-set__file">
-      {{ form.password1 }}
+        {{ form.email.errors }}
+      <div class="input-set {% if form.password1.errors %}invalid{% endif %}">
+        <label class="input-set__label">Password:</label>
+        <div class="input-set__file">{{ form.password1 }}</div>
       </div>
-    </div>
-    <div class="input-set">
+        {{ form.password1.errors }}
+      <div class="input-set {% if form.password2.errors %}invalid{% endif %}">
+        <label class="input-set__label">Password (again):</label>
+        <div class="input-set__file">{{ form.password2 }}</div>
+      </div>
       {{ form.password2.errors }}
-      <label class="input-set__label">Password (again):</label>
-      <div class="input-set__file">
-      {{ form.password2 }}
-      </div>
     </div>
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     <button class="bttn--base primaryAction" type="submit">{% trans "Sign Up" %}</button>
   </form>
-  </div>
-  <div class="social-body">
-    
   </div>
   <div class="account-footer">
     <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
