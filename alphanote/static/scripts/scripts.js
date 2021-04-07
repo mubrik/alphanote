@@ -442,7 +442,7 @@ class ModalHandler {
     let message = document.createElement('h3');
     message.textContent = "Enter your e-mail address below, and we'll send you an e-mail allowing you to reset it"
     const resetConfirm = document.createElement('button');
-    setAttributes(resetConfirm, {'class': 'bttn--base', 'type': 'submit'});
+    setAttributes(resetConfirm, {'class': 'bttn--base', 'type': 'submit', 'form': "accountForm"});
     resetConfirm.innerHTML = 'reset password';
     elemCreated['footer'].push(resetConfirm);
     elemCreated['header'].push(message);
