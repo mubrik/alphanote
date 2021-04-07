@@ -513,32 +513,6 @@ body {
 }
 .modal .modal-body {
   padding: 0.2em 0;
-  /* .note-form {
-    box-shadow: none;
-    padding: .1em .1em;
-    background: inherit;
-    width: 100%;
-
-    .note-editing-area {
-      background: linear-gradient(92deg, rgb(255, 255, 255) 43%, rgb(235 238 243) 88%);
-    }
-
-    .note-editable {
-      min-height: fit-content !important;
-      max-height: 55vh !important;
-    }
-  }
-
-  #NoteModalForm {
-    .note-editing-area {
-      background: linear-gradient(92deg, rgb(255, 255, 255) 43%, rgb(235 238 243) 88%);
-    }
-
-    .note-editable {
-      min-height: fit-content !important;
-      max-height: 55vh !important;
-    }
-  } */
 }
 .modal .modal-footer {
   display: flex;
@@ -554,6 +528,16 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+@media (min-width: 600px) {
+  .modal {
+    width: 85%;
+  }
+  .modal .modal-note .note-editable {
+    min-height: fit-content !important;
+    max-height: 50vh !important;
+  }
+}
+
 .modal-overlay {
   position: fixed;
   z-index: 999;
