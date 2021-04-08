@@ -149,4 +149,4 @@ cython_debug/
 !.elasticbeanstalk/*.global.yml
 
 # files i need hidden
-.unregister/*
+.unregister/
