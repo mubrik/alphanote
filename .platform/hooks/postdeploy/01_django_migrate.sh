@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 PYTHONPATH=/var/app/venv/*/bin
 
 # PYTHONPATH is available as EC2 instance environment variable
