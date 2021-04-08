@@ -10,12 +10,11 @@
   grid-area: welcome;
   justify-self: center;
   text-align-last: center;
-  margin-bottom: 0.5em;
 }
 .account-main > .account-body {
   grid-area: login;
   justify-self: end;
-  margin: 0.2em 0.4em;
+  margin: 0.1em 0.4em;
 }
 .account-main > .account-body form {
   display: flex;
@@ -34,7 +33,7 @@
 .account-main > .social-body {
   grid-area: social_login;
   justify-self: flex-start;
-  margin: 0.2em 0.4em;
+  margin: 0.1em 0.4em;
 }
 .account-main > .account-footer {
   grid-area: footer;
