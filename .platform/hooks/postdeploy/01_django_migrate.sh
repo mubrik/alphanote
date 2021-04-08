@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "hello world"
+source /var/app/venv/*/bin/activate
+cd /var/app/staging
