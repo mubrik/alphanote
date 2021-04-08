@@ -16,7 +16,7 @@ from .settings_scripts import get_linux_ec2_private_ip
 
 # my custom settings 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # using projectapp dir instead of base dir to host templates and static file
 PROJECTAPP_DIR = Path(__file__).resolve().parent
@@ -265,3 +265,19 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# basic logging with file rotation
+if not DEBUG:
+    log_level = os.getenv('LOG_LEVEL', 'INFO')
+    handlers = dict(file={'class': 'logging.handlers.TimedRotatingFileHandler',
+                        'filename': os.getenv('LOG_FILE_PATH'),
+                        'when': 'midnight',
+                        'interval': 1,
+                        'backupCount': 1,
+                        'encoding': 'utf-8'})
+    loggers = dict(django=dict(level=log_level, handlers=['file']),
+                myapp=dict(level=log_level, handlers=['file']))
+    LOGGING = dict(version=1,
+                disable_existing_loggers=False,
+                handlers=handlers,
+                loggers=loggers)
