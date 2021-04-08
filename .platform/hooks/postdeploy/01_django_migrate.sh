@@ -1,5 +1,5 @@
 #!/bin/bash
-PYTHONPATH=/var/app/venv/staging-LQM1lest/bin
+PYTHONPATH=/var/app/venv/*/bin
 
 # PYTHONPATH is available as EC2 instance environment variable
 source "$PYTHONPATH/activate" && {
