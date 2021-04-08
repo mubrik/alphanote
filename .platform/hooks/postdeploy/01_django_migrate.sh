@@ -1,4 +1,5 @@
 #!/bin/bash
+PYTHONPATH=/var/app/venv/staging-LQM1lest/bin
 
 # PYTHONPATH is available as EC2 instance environment variable
 source "$PYTHONPATH/activate" && {
@@ -7,4 +8,14 @@ source "$PYTHONPATH/activate" && {
 
     # run migrate
     python manage.py migrate --noinput;
+}
+
+source "$PYTHONPATH/activate" && {
+    # run collectstatic
+    python manage.py collectstatic --noinput;
+}
+
+source "$PYTHONPATH/activate" && {
+    # run custom createsu script 
+    python manage.py createsu;
 }
