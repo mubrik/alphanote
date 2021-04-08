@@ -21,8 +21,8 @@ DEBUG = False
 # using projectapp dir instead of base dir to host templates and static file
 PROJECTAPP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = Path.joinpath(PROJECTAPP_DIR, 'static')
-STATIC_ROOT = Path.joinpath(PROJECTAPP_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR, ]
+STATIC_ROOT = Path.joinpath(PROJECTAPP_DIR, 'staticfiles')
 
 # directory for staticfiles, media url
 # Static files (CSS, JavaScript, Images)
@@ -39,7 +39,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 # whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_HOST = os.environ['STATIC_HOST'] if not DEBUG else ''
+STATIC_HOST = os.environ.get('STATIC_HOST', '')
 STATIC_URL = STATIC_HOST + '/static/' 
 
 # Database postgres
