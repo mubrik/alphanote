@@ -1,21 +1,8 @@
 #!/bin/sh
-PYTHONPATH=/var/app/venv/*/bin
+source /var/app/venv/*/bin/activate
+cd /var/app/staging
 
-# PYTHONPATH is available as EC2 instance environment variable
-source "$PYTHONPATH/activate" && {
-    # log with migrations have been applied
-    python manage.py showmigrations;
-
-    # run migrate
-    python manage.py migrate --noinput;
-}
-
-source "$PYTHONPATH/activate" && {
-    # run collectstatic
-    python manage.py collectstatic --noinput;
-}
-
-source "$PYTHONPATH/activate" && {
-    # run custom createsu script 
-    python manage.py createsu;
-}
+python manage.py showmigrations;
+python manage.py migrate --noinput;
+python manage.py collectstatic --noinput;
+python manage.py createsu;
