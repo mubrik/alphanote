@@ -1,7 +1,7 @@
 from django.http import request
 from django.views.generic import (ListView, UpdateView,
                                   FormView, DeleteView,
-                                  DetailView)
+                                  DetailView, TemplateView)
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.urls import reverse_lazy
@@ -23,7 +23,8 @@ class NoteHomeHandler(ListView):
         """Insert the list object into the context dict, also inserts note creation form into context"""
 
         context = super().get_context_data(**kwargs)
-        context.update({'form': CreateNoteForm(self.request.user, ), 'form1': CreateNoteBookForm(),})
+        context.update({'form': CreateNoteForm(
+            self.request.user, ), 'form1': CreateNoteBookForm(), })
         return context
 
     def get_queryset(self):
@@ -44,15 +45,17 @@ class CreateNoteHandler(FormView):
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
         self.object = form.save(commit=False)
-        if self.object.content :
+        if self.object.content:
             print(f'content {self.object.content}')
             self.object.created_by = self.request.user
             self.object = form.save()
             return super().form_valid(form)
         else:
             print(f'note content empty?: {self.object.content}')
-            messages.add_message(self.request, messages.INFO, 'Empty Note Deleted')
+            messages.add_message(
+                self.request, messages.INFO, 'Empty Note Deleted')
             return super().form_valid(form)
+
 
 class NoteHomeView(LoginRequiredMixin, View):
 
@@ -122,7 +125,7 @@ class JavaScriptUpdateNote(UpdateView):
 
 
 class JavaScriptViewNote(UpdateView):
-    
+
     template_name = 'notes/note_form.html'
     success_url = reverse_lazy('note_home')
 
@@ -137,3 +140,8 @@ class JavaScriptViewNote(UpdateView):
         """If the form is valid, save the associated model."""
         self.object = form.save()
         return super().form_valid(form)
+
+
+class AboutPageView(TemplateView):
+
+    template_name = "about.html"

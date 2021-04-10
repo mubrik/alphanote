@@ -51,4 +51,29 @@
   }
 }
 
+.account-about {
+  width: 100%;
+  height: 100vh;
+  padding: 0.4em 0.5em;
+}
+.account-about .account-body {
+  width: 80%;
+  display: grid;
+  grid-template-rows: auto;
+  margin: auto;
+}
+.account-about .account-body .account-card {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  border-bottom: 2px solid coral;
+  min-height: 80px;
+  align-items: center;
+  padding: 0.4em 0.2em;
+}
+.account-about .account-body .account-card section,
+.account-about .account-body .account-card h1,
+.account-about .account-body .account-card p {
+  padding: 0.4em 0.2em;
+}
+
 /*# sourceMappingURL=userstyles.css.map */

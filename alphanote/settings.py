@@ -16,7 +16,7 @@ from .settings_scripts import get_linux_ec2_private_ip
 
 # my custom settings 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # using projectapp dir instead of base dir to host templates and static file
 PROJECTAPP_DIR = Path(__file__).resolve().parent

@@ -1,0 +1,35 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block body %}
+  <div class="account-about">
+    <div class="account-body">
+      <section class="account-card">
+        <h1>Noted</h1>
+        <p>A simple webapp for taking notes, keeping code, e.t.c</p>
+      </section>
+      <section class="account-card">
+        <h1>Goal</h1>
+        <p>Hello, The main goal of this webapp is a base for fine tuning my web development stack. As a developer still in learning, i will be updating this project 
+        backend and frontend features as i go.
+        Go ahead, Take a spin.</p>
+      </section>
+      <section class="account-card">
+        <h1>Tech Stack</h1>
+        <section>
+          <p><strong>Backend:</strong> Django, Django-allauth, Django-Summernote</p>
+          <p><strong>Frontend:</strong> SCSS, Javascript, Materialize, FontAwesome, anime.js</p>
+          <p><strong>Hosting:</strong> AWS Beanstalk, AWS EC2, AWS S3, AWS Cloudfront</p>
+        </section>
+      </section>
+      <section class="account-card">
+        <h1>Data Usage</h1>
+        <p>Note, any data entered isnt shared, can and will be deleted at will.</p>
+      </section>
+      <section class="account-card">
+        <h1>Contact</h1>
+        <p>mubrikdev@gmail.com</p>
+      </section>
+    </div>
+  </div>
+{% endblock body %}

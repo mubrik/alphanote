@@ -874,7 +874,7 @@ body {
   display: flex;
   flex: 1 2 auto;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 0.3em;
   overflow: hidden;
@@ -884,13 +884,15 @@ body {
 }
 .wrapper-nav .nav-main .nav--bttn,
 .wrapper-nav .nav-main .nav--bttn__dropdown,
-.wrapper-nav .nav-main .nav--bttn__profile {
+.wrapper-nav .nav-main .nav--bttn__profile,
+.wrapper-nav .nav-main #aboutbtn {
   display: none;
 }
 .wrapper-nav .nav-main #single-dropdown,
 .wrapper-nav .nav-main #loginbtn,
 .wrapper-nav .nav-main #signupbtn {
   display: inline-flex;
+  margin: 0 0.7em;
 }
 @media (min-width: 768px) {
   .wrapper-nav .nav-main {
@@ -899,7 +901,8 @@ body {
   .wrapper-nav .nav-main .nav--bttn,
 .wrapper-nav .nav-main .nav--bttn__dropdown,
 .wrapper-nav .nav-main .nav--bttn__profile,
-.wrapper-nav .nav-main .nav--bttn__logout {
+.wrapper-nav .nav-main .nav--bttn__logout,
+.wrapper-nav .nav-main #aboutbtn {
     display: inline-flex;
     margin: 0 0.5em;
   }

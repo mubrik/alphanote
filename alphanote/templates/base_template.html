@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-{% get_media_prefix as MEDIA_PREFIX %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -10,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     <script src="{% static 'scripts/jquery/jquery-3.5.1.min.js' %}"> </script>
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+    <link href="{% static 'profiles/profilestyles.css' %}" rel="stylesheet" />
+    <link href="{% static 'userauth/bootstrap-social.css' %}" rel="stylesheet" />
+    <link href="{% static 'userauth/userstyles.css' %}" rel="stylesheet" />
     {% block styles %}
 
     {% endblock styles %}
@@ -36,10 +38,12 @@
               <input id="search" name="search_bar" type="search" placeholder="Search...">
             </form>
             <a class="nav--bttn__profile mg-l" href="{% url 'profile_detail' %}"> Profile </a>
+            <a class="nav--bttn" href="{% url 'about_main' %}" id="aboutbtn"> About </a>
             <a href="#" class="nav--bttn__logout modal-trigger account-trigger mg-l" data-target="account-modal" data-url="{% url 'account_logout' %}" data-bs="logout">Logout</a>
             {% else %}
-            <a class="nav--bttn" href="{% url 'account_login' %}"> Login </a>
-            <a class="nav--bttn" href="{% url 'account_signup' %}"> Signup </a>
+            <a class="nav--bttn" href="{% url 'account_login' %}" id="loginbtn"> Login </a>
+            <a class="nav--bttn" href="{% url 'account_signup' %}" id="signupbtn"> Signup </a>
+            <a class="nav--bttn" href="{% url 'about_main' %}" id="aboutbtn"> About </a>
             {% endif %}
             <div class="nav-dropdown-content dropdown-content" id="dropdown1" >
               <a class="icon--accept" href="{% url 'note_home' %}"> Notes </a>

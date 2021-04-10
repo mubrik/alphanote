@@ -1,4 +1,4 @@
-{% extends "userauth/base_account_template.html" %}
+{% extends "base_template.html" %}
 {% load static %}
 {% load i18n %}
 {% load account socialaccount %}
@@ -21,12 +21,8 @@
     {% for hidden in form.hidden_fields %}
     {{ hidden }}
     {% endfor %}
-    {% if form.non_field_errors %}
-    {% for error in form.non_field_errors %}
-      {{ error }}
-    {% endfor %}
-    {% endif %}
     <div class="input-group">
+    {{ form.non_field_errors }}
       <div class="input-set {% if form.username.errors %}invalid{% endif %}">
         <label class="input-set__label">Username:</label>
         <div class="input-set__file">{{ form.login }}</div>
