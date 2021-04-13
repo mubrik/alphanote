@@ -15,8 +15,8 @@
     
   </div>
   <div class="account-footer">
-    <a class="bttn" href="{% url 'note_home' %}"> Notes </a>
-    <p>{% blocktrans %}<a href="{{ login_url }}">sign in here</a>.{% endblocktrans %}</p>
+    <a class="bttn--base" href="{% url 'note_home' %}"> Notes </a>
+    {% blocktrans %}<a class="bttn--base" href="{{ login_url }}">sign in here</a>.{% endblocktrans %}
   </div>
 </div>
 {% endblock body %}
