@@ -14,9 +14,9 @@ import os
 from pathlib import Path
 from .settings_scripts import get_linux_ec2_private_ip
 
-# my custom settings 
+# my custom settings
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # using projectapp dir instead of base dir to host templates and static file
 PROJECTAPP_DIR = Path(__file__).resolve().parent
@@ -40,7 +40,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 # whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_HOST = os.environ.get('STATIC_HOST', '')
-STATIC_URL = STATIC_HOST + '/static/' 
+STATIC_URL = STATIC_HOST + '/static/'
 
 # Database postgres
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -58,15 +58,15 @@ if 'RDS_DB_NAME' in os.environ:
     }
 else:
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
 
 # login redirect
 LOGIN_REDIRECT_URL = 'note_home'
@@ -82,7 +82,7 @@ PASSWORD_HASHERS = [
 # email backend
 SENDGRID_API_KEY = os.environ['SG_API_KEY']
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_SANDBOX_MODE_IN_DEBUG=False
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 
 # site for django.contrib.sites app
@@ -137,7 +137,7 @@ SOCIALACCOUNT_PROVIDERS = {
 SUMMERNOTE_THEME = 'lite'
 SUMMERNOTE_CONFIG = {
     'iframe': False,
-    'summernote' : {
+    'summernote': {
         'width': '100%',
         'codeviewFilter': True,
         'toolbar': [
@@ -270,14 +270,21 @@ USE_TZ = True
 if not DEBUG:
     log_level = os.getenv('LOG_LEVEL', 'INFO')
     handlers = dict(file={'class': 'logging.handlers.TimedRotatingFileHandler',
-                        'filename': os.getenv('LOG_FILE_PATH'),
-                        'when': 'midnight',
-                        'interval': 1,
-                        'backupCount': 1,
-                        'encoding': 'utf-8'})
+                          'filename': os.getenv('LOG_FILE_PATH'),
+                          'when': 'midnight',
+                          'interval': 1,
+                          'backupCount': 1,
+                          'encoding': 'utf-8'})
     loggers = dict(django=dict(level=log_level, handlers=['file']),
-                myapp=dict(level=log_level, handlers=['file']))
+                   myapp=dict(level=log_level, handlers=['file']))
     LOGGING = dict(version=1,
-                disable_existing_loggers=False,
-                handlers=handlers,
-                loggers=loggers)
+                   disable_existing_loggers=False,
+                   handlers=handlers,
+                   loggers=loggers)
+
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar') 
+    MIDDLEWARE.insert(2, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    INTERNAL_IPS = [
+    '127.0.0.1',
+]

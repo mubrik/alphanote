@@ -47,16 +47,8 @@
   <div class="social-body">
     {% get_providers as socialaccount_providers %}
     {% for provider in socialaccount_providers %}
-    {% if provider.id == "openid" %}
-    {% for brand in provider.get_brands %}
-      <a title="{{brand.name}}" 
-        class=" bttn--social btn-social socialaccount_provider {{provider.id}} {{brand.id}}" 
-        href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
-        ><span class="fab fa-google"></span> Sign in With brand {{brand.name}}</a>
-    {% endfor %}
-    {% endif %}
-      <a title="{{provider.name}}" class=" bttn--social btn-social socialaccount_provider {{provider.id}}" 
-        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><span class="fab fa-google"></span> Sign in With {{provider.name}}</a>
+      <a title="{{provider.name}}" class=" bttn--social socialaccount_provider {{provider.id}}" 
+        href="{% provider_login_url provider.id process="connect" scope=scope auth_params=auth_params %}"><span class="fab fa-google"></span> Sign in With {{provider.name}}</a>
     {% endfor %}
   </div>
   <div class="account-footer">

@@ -1,6 +1,8 @@
-from django.views.generic import TemplateView
-from allauth.account.views import (LoginView, PasswordChangeView,
-                                   PasswordResetView, PasswordChangeView)
+from allauth.account.views import (
+    LoginView, SignupView,
+    PasswordResetView, PasswordChangeView,
+    EmailView, LogoutView)
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 
@@ -9,22 +11,36 @@ UserModel = get_user_model()
 
 
 class LoginHandler(LoginView):
-
-    pass
-
-
-class AjaxPasswordChangeView(PasswordChangeView):
-
-    template_name = 'userauth/password_change_ajax.html'
-    success_url = reverse_lazy("profile_detail")
+    template_name = 'account/login.html'
 
 
-class AjaxPasswordResetView(PasswordResetView):
+class LogoutHandler(LogoutView):
+    template_name = 'account/logout.html'
+
+
+class SignupHandler(SignupView):
+    template_name = 'account/signup.html'
+
+
+class PasswordChangeHandler(LoginRequiredMixin, PasswordChangeView):
+    template_name = 'account/password_change.html'
+
+
+class EmailAccountHandler(LoginRequiredMixin, EmailView):
+    template_name = 'account/email.html'
+
+
+class PasswordResetHandler(PasswordResetView):
+    template_name = 'account/password_reset.html'
+
+
+class AjaxPasswordResetView(LoginRequiredMixin, PasswordResetView):
 
     template_name = 'userauth/password_reset_ajax.html'
     success_url = reverse_lazy("profile_detail")
 
-class PasswordChangeHandler(PasswordChangeView):
+
+class PasswordChangeHandler(LoginRequiredMixin, PasswordChangeView):
     """ subclass to add more contect to view """
 
     def get_context_data(self, **kwargs):

@@ -1,15 +1,12 @@
 {% extends "base_template.html" %}
 {% load static %}
-
-{% block styles %}
-  <link href="{% static 'profiles/profilestyles.css' %}" rel="stylesheet" />
-{% endblock styles %}
+{% load i18n %}
 
 {% block innermain %}
 <div class ="inner-main">
 
 {% block body %}
-  <div class="wrapper-base mflex flex-col" style="height:100vh;">
+  <div class="wrapper-base" style="height: calc(100vh - 69px);">
     <div class="profile-main">
       <div class="profile-card">
       {% if user.user_profile.profile_picture %}
@@ -53,9 +50,9 @@
       </div>
       <div class="profile-extras">
         {% block extras %}
-        <a href="#" class="bttn--base modal-trigger account-trigger" data-target="account-modal" data-url="{% url 'ajax_password_reset' %}" data-bs="password-reset">Reset Password</a>
-        <a href="{% url 'account_change_password' %}" class="bttn--base">Update Password</a>
-        <a href="#" class="bttn--base modal-trigger account-trigger" data-target="account-modal" data-url="{% url 'account_logout' %}" data-bs="logout">Logout</a>
+        <a class="bttn--base" href="{% url 'account_email' %}" >{% trans "Update Email" %}</a>
+        <a class="bttn--base" href="{% url 'account_change_password' %}">{% trans "Update Password" %}</a>
+        <a href="#" class="bttn--base modal-trigger account-trigger" data-target="account-modal" data-url="{% url 'ajax_password_reset' %}" data-bs="password-reset">{% trans "Reset Password" %}</a>
         {% endblock extras %}
       </div>
     </div>

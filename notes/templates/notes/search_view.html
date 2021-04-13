@@ -41,7 +41,7 @@
       {% endblock body %}
     </div>
   {% else %}
-    {% include "notes/empty_card.html" %}
+    {% include "notes/empty_card.html" with search=True%}
   {% endif %}
 {% endblock innermain %}
 
@@ -81,4 +81,7 @@
 
 {% block script %}
   <script src="{% static 'notes/summernote/summernote-lite.min.js' %}"> </script>
+  {% if not notebooks or notes %}
+    <script> animator.animate('','emptyPage')</script>
+  {% endif %}
 {% endblock script %}
