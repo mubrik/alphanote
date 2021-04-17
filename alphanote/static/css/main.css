@@ -895,13 +895,13 @@ body {
 }
 .wrapper-nav .nav-main .nav--bttn,
 .wrapper-nav .nav-main .nav--bttn__dropdown,
-.wrapper-nav .nav-main .nav--bttn__profile,
-.wrapper-nav .nav-main #aboutbtn {
+.wrapper-nav .nav-main .nav--bttn__profile {
   display: none;
 }
 .wrapper-nav .nav-main #single-dropdown,
 .wrapper-nav .nav-main #loginbtn,
-.wrapper-nav .nav-main #signupbtn {
+.wrapper-nav .nav-main #signupbtn,
+.wrapper-nav .nav-main #aboutbtn {
   display: inline-flex;
   margin: 0 0.7em;
 }
@@ -912,8 +912,7 @@ body {
   .wrapper-nav .nav-main .nav--bttn,
 .wrapper-nav .nav-main .nav--bttn__dropdown,
 .wrapper-nav .nav-main .nav--bttn__profile,
-.wrapper-nav .nav-main .nav--bttn__logout,
-.wrapper-nav .nav-main #aboutbtn {
+.wrapper-nav .nav-main .nav--bttn__logout {
     display: inline-flex;
     margin: 0 0.5em;
   }

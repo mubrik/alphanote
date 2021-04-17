@@ -38,7 +38,6 @@
               <input id="search" name="search_bar" type="search" placeholder="Search...">
             </form>
             <a class="nav--bttn__profile mg-l" href="{% url 'profile_detail' %}"> Profile </a>
-            <a class="nav--bttn" href="{% url 'about_main' %}" id="aboutbtn"> About </a>
             <a href="#" class="nav--bttn__logout modal-trigger account-trigger mg-l" data-target="account-modal" data-url="{% url 'account_logout' %}" data-bs="logout">Logout</a>
             {% else %}
             <a class="nav--bttn" href="{% url 'account_login' %}" id="loginbtn"> Login </a>
