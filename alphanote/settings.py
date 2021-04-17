@@ -153,7 +153,7 @@ SUMMERNOTE_CONFIG = {
 }
 
 # whitenoise config
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # django default
 
