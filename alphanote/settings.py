@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
+from .settings_scripts import get_linux_ec2_private_ip
 
 # my custom settings
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -55,7 +56,7 @@ if 'RDS_DB_NAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
-    """ SECURE_SSL_REDIRECT = True """
+    SECURE_SSL_REDIRECT = True
     DEBUG = False
 else:
     DATABASES = {
@@ -68,6 +69,8 @@ else:
             'PORT': '5432',
         }
     }
+
+
 
 # login redirect
 LOGIN_REDIRECT_URL = 'note_home'
@@ -170,6 +173,11 @@ ALLOWED_HOSTS = [
     'localhost', '.amazonaws.com',
     '.elasticbeanstalk.com', '127.0.0.1',
 ]
+
+# adds aws elb private ip to allowed hosts
+private_ip = get_linux_ec2_private_ip() if not DEBUG else None
+if private_ip:
+    ALLOWED_HOSTS.append(private_ip)
 
 
 # Application definition
