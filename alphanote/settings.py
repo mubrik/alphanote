@@ -56,7 +56,7 @@ if 'RDS_DB_NAME' in os.environ:
         }
     }
     SECURE_SSL_REDIRECT = True
-    DEBUG = False
+    DEBUG = True
 else:
     DATABASES = {
         'default': {
@@ -279,9 +279,9 @@ if not DEBUG:
                    handlers=handlers,
                    loggers=loggers)
 
-if DEBUG:
+""" if DEBUG:
     INSTALLED_APPS.append('debug_toolbar') 
     MIDDLEWARE.insert(2, 'debug_toolbar.middleware.DebugToolbarMiddleware')
     INTERNAL_IPS = [
     '127.0.0.1',
-]
+] """
