@@ -56,6 +56,7 @@ if 'RDS_DB_NAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
+    SECURE_SSL_REDIRECT = True
 else:
     DATABASES = {
         'default': {
@@ -165,6 +166,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     'alphanote-dev.eu-west-2.elasticbeanstalk.com',
+    'noted.mubrik.com',
     'localhost', '.amazonaws.com',
     '.elasticbeanstalk.com', '127.0.0.1',
 ]
