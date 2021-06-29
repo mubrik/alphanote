@@ -56,7 +56,6 @@ if 'RDS_DB_NAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
-    SECURE_SSL_REDIRECT = True
     DEBUG = False
 else:
     DATABASES = {
