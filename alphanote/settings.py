@@ -16,7 +16,7 @@ from .settings_scripts import get_linux_ec2_private_ip
 
 # my custom settings
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # using projectapp dir instead of base dir to host templates and static file
 PROJECTAPP_DIR = Path(__file__).resolve().parent
@@ -36,11 +36,6 @@ AWS_S3_REGION_NAME = 'eu-west-2'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-
-# whitenoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_HOST = os.environ.get('STATIC_HOST', '')
-STATIC_URL = STATIC_HOST + '/static/'
 
 # Database postgres
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -68,8 +63,12 @@ else:
             'PORT': '5432',
         }
     }
+    DEBUG = True
 
-
+# whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_HOST = os.environ.get('STATIC_HOST', '')
+STATIC_URL = STATIC_HOST + '/static/'
 
 # login redirect
 LOGIN_REDIRECT_URL = 'note_home'
