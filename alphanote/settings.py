@@ -271,7 +271,7 @@ USE_L10N = True
 USE_TZ = True
 
 # basic logging with file rotation
-""" if not DEBUG:
+if not DEBUG:
     log_level = os.getenv('LOG_LEVEL', 'INFO')
     handlers = dict(file={'class': 'logging.handlers.TimedRotatingFileHandler',
                           'filename': os.getenv('LOG_FILE_PATH'),
@@ -284,7 +284,7 @@ USE_TZ = True
     LOGGING = dict(version=1,
                    disable_existing_loggers=False,
                    handlers=handlers,
-                   loggers=loggers) """
+                   loggers=loggers)
 
 if DEBUG:
     INSTALLED_APPS.append('debug_toolbar') 
